@@ -1,1 +1,3 @@
 # AcademiCal
+
+Project Blueprint
