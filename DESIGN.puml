@@ -11,22 +11,28 @@ folder src {
             - LocalDateTime endTime
             - Location location
             - Boolean completed
+            - String repeating  /' weekly, monthly, daily, biweekly... '/
+                                /' could probably use a better type than String '/
 
-            + getName()
-            + setName()
-            + getCourse()
-            + setCourse()
-            + getStartTime()
-            + setStartTime()
-            + getEndTime()
-            + setEndTime()
-            + getDuration()
-            + getLocation()
-            + setLocation()
-            + getCompleted()
-            + setCompleted()
+            + String getName()
+            + void setName(String name)
+            + Course getCourse()
+            + void setCourse(Course course)
+            + LocalDateTime getStartTime()
+            + void setStartTime(LocalDateTime time)
+            + LocalDateTime getEndTime()
+            + void setEndTime(LocalDateTime time)
+            + Duration getDuration()
+            + Location getLocation()
+            + void setLocation(Location location)
+            + Boolean getCompleted()
+            + void setCompleted(Boolean completed)
+            + String getRepeating()
+            + void setRepeating(String repeating)
 
-            + moveTime()  /' Moves start and end times in unison '/
+            ' Moves start and end times in unison
+            + void moveTime(Duration amount, Boolean forwards)
+            + void moveTime(LocalDate toDate)
         }
 
         class ClassEvent extends Event {
@@ -127,18 +133,20 @@ folder src {
             - Double longitude
             - Double latitude
 
-            + void setBuildingName(String buildingName)
-            + void setAddress(String address)
-            + getAddress()
-            + getBuildingName()
+            + void setBuildingName()
+            + void setAddress()
+            + String getAddress()
+            + String getBuildingName()
         }
 
         class Resource{
             - String link
             - File bibTex
 
-            + void setLink(String link)
-            + getLink()
+            + void setLink()
+            + String getLink()
+            + void setBibtex
+            + File getBibtex
         }
 
     }  /' folder entity '/
