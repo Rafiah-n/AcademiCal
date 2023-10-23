@@ -30,17 +30,9 @@ folder src {
         }
 
         class ClassEvent extends Event {
-            - String type
-
-            + getType()
-            + setType()
         }
 
         class StudyEvent extends Event {
-            - String[] todoList
-
-            +getToDoList()
-            +setToDoList()
         }
 
         class ReadingEvent extends Event {
