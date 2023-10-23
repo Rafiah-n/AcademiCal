@@ -31,7 +31,7 @@ folder src {
             + void setRepeating(String repeating)
 
             ' Moves start and end times in unison
-            + void moveTime(Duration amount, Boolean forwards)
+            + void moveTime(Duration amount)  /' Negative duration values move backwards '/
             + void moveTime(LocalDate toDate)
         }
 
@@ -72,16 +72,16 @@ folder src {
             - double[] percentageReduction
 
 
-            + getType()
-            + setType()
-            + getPercentage()
-            + setPercentage()
-            + isRequired()
-            + setRequired()
-            + getLateDueDate()
-            + setLateDueDate()
-            + getPercentageReduction()
-            + setPercentageReduction()
+            + String getType()
+            + int getPercentage()
+            + boolean isRequired()
+            + DateTime getLateDueDate()
+            + double[] getPercentageReduction()
+            + void setType(String type)
+            + void setPercentage(int percentage)
+            + void setRequired(boolean isRequired)
+            + void setLateDueDate(DateTime time)
+            + void setPercentageReduction(double[] percentageReduction)
         }
 
         class User {
@@ -137,6 +137,8 @@ folder src {
             + void setAddress()
             + String getAddress()
             + String getBuildingName()
+            + void setLongitude()
+            + void setLatitude()
         }
 
         class Resource{
