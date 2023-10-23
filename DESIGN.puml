@@ -1,0 +1,15 @@
+@startuml
+
+folder src {
+
+    folder entity {
+
+        abstract Event {
+
+        }
+
+    }  /' folder entity '/
+
+}  /' folder src '/
+
+@enduml
