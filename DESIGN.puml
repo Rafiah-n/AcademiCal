@@ -8,6 +8,28 @@ folder src {
 
         }
 
+        abstract semester{
+         - LocalDate startDate
+         - LocalDate endDate
+         - String[] courses
+         - LocalDate[] holidays
+         - LocalDate[] examSeason
+
+         + getStartDate()
+         + getEndDate()
+         + getStartDate()
+         + getStartDate()
+
+        }
+
+        abstract course {
+        - ClassEvent[] classes
+        - AssignmentEvent[] assignments
+        - String courseContact
+        - Resource textbook
+
+        }
+
     }  /' folder entity '/
 
 }  /' folder src '/
