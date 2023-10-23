@@ -17,17 +17,28 @@ folder src {
 
          + getStartDate()
          + getEndDate()
-         + getStartDate()
-         + getStartDate()
-
+         + getHolidays()
+         + getExamSeason()
+         + setStartDate(LocalDate date)
+         + setEndDate(LocalDte date)
+         + setHolidays(LocalDate[] dates)
+         + setExamSeason(LocalDate[] dates)
         }
 
         abstract course {
         - ClassEvent[] classes
         - AssignmentEvent[] assignments
         - String courseContact
-        - Resource textbook
+        - Resource[] textbooks
 
+        + getClasses()
+        + getAssignments()
+        + getCourseContact()
+        + getTextbooks()
+        + setClasses(ClassEvent[] classes)
+        + setAssignments(AssignmentEvent[])
+        + setCourseContact(String contact)
+        + setTextbooks(Resource[] textbooks)
         }
 
     }  /' folder entity '/
