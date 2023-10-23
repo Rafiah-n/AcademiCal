@@ -11,22 +11,28 @@ folder src {
             - LocalDateTime endTime
             - Location location
             - Boolean completed
+            - String repeating  /' weekly, monthly, daily, biweekly... '/
+                                /' could probably use a better type than String '/
 
-            + getName()
-            + setName()
-            + getCourse()
-            + setCourse()
-            + getStartTime()
-            + setStartTime()
-            + getEndTime()
-            + setEndTime()
-            + getDuration()
-            + getLocation()
-            + setLocation()
-            + getCompleted()
-            + setCompleted()
+            + String getName()
+            + void setName(String name)
+            + Course getCourse()
+            + void setCourse(Course course)
+            + LocalDateTime getStartTime()
+            + void setStartTime(LocalDateTime time)
+            + LocalDateTime getEndTime()
+            + void setEndTime(LocalDateTime time)
+            + Duration getDuration()
+            + Location getLocation()
+            + void setLocation(Location location)
+            + Boolean getCompleted()
+            + void setCompleted(Boolean completed)
+            + String getRepeating()
+            + void setRepeating(String repeating)
 
-            + moveTime()  /' Moves start and end times in unison '/
+            ' Moves start and end times in unison
+            + void moveTime(Duration amount, Boolean forwards)
+            + void moveTime(LocalDate toDate)
         }
 
         class ClassEvent extends Event {
@@ -39,9 +45,9 @@ folder src {
         class StudyEvent extends Event {
             - String[] todo
 
-            + getTodo
-            + addTodo
-            + removeTodo
+            + getTodo()
+            + addTodo()
+            + removeTodo()
         }
 
         class ReadingEvent extends Event {
@@ -89,14 +95,17 @@ folder src {
             - LocalDate[] holidays
             - LocalDate[] examSeason
 
-            + getStartDate()
-            + getEndDate()
-            + getHolidays()
-            + getExamSeason()
-            + setStartDate(LocalDate date)
-            + setEndDate(LocalDte date)
-            + setHolidays(LocalDate[] dates)
-            + setExamSeason(LocalDate[] dates)
+            + LocalDate getStartDate()
+            + LocalDate getEndDate()
+            + String[] getCourses()
+            + LocalDate[] getHolidays()
+            + LocalDate[] getExamSeason()
+            + void setStartDate(LocalDate date)
+            + void setEndDate(LocalDate date)
+            + void addHolidays(LocalDate date)
+            + void addExamSeason(LocalDate date)
+            + void deleteHolidays(LocalDate date)
+            + void deleteExamSeason(LocalDate date)
         }
 
         class course {
@@ -105,14 +114,17 @@ folder src {
             - String courseContact
             - Resource[] textbooks
 
-            + getClasses()
-            + getAssignments()
-            + getCourseContact()
-            + getTextbooks()
-            + setClasses(ClassEvent[] classes)
-            + setAssignments(AssignmentEvent[])
-            + setCourseContact(String contact)
-            + setTextbooks(Resource[] textbooks)
+            + ClassEvent[] getClasses()
+            + AssignmentEvent[] getAssignments()
+            + String getCourseContact()
+            + Resource[] getTextbooks()
+            + void addClasses(ClassEvent class)
+            + void deleteClasses(ClassEvent class)
+            + void addAssignments(AssignmentEvent[] assignment)
+            + void deleteAssignments(AssignmentEvent[] assignment)
+            + void setCourseContact(String contact)
+            + void addTextbooks(Resource textbooks)
+            + void deleteTextbooks(Resource textbooks)
         }
 
         class Location{
@@ -121,18 +133,20 @@ folder src {
             - Double longitude
             - Double latitude
 
-            + setBuildingName()
-            + setAddress()
-            + getAddress()
-            + getBuildingName()
+            + void setBuildingName()
+            + void setAddress()
+            + String getAddress()
+            + String getBuildingName()
         }
 
         class Resource{
             - String link
             - File bibTex
 
-            + setLink()
-            + getLink()
+            + void setLink()
+            + String getLink()
+            + void setBibtex
+            + File getBibtex
         }
 
     }  /' folder entity '/
