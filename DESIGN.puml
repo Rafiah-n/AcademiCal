@@ -30,11 +30,11 @@ folder src {
         }
 
         class ClassEvent extends Event {
-
+        String type
         }
 
         class StudyEvent extends Event {
-
+        String[] toDoList
         }
 
         class ReadingEvent extends Event {
