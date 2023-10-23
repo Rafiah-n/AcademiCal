@@ -131,6 +131,8 @@ folder src {
             + void setAddress()
             + String getAddress()
             + String getBuildingName()
+            + void setLongitude()
+            + void setLatitude()
         }
 
         class Resource{
