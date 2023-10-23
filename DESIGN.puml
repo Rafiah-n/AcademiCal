@@ -30,11 +30,11 @@ folder src {
         }
 
         class ClassEvent extends Event {
-        String type
+
         }
 
         class StudyEvent extends Event {
-        String[] toDoList
+
         }
 
         class ReadingEvent extends Event {
@@ -85,10 +85,12 @@ folder src {
 
     class Resource{
         -String link
-        -File biblex
+        -File bibtex
 
         + setLink()
         + getLink()
+        + setBibtex()
+        + getBibtex()
     }
 
     }  /' folder entity '/
