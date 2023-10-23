@@ -5,7 +5,48 @@ folder src {
     folder entity {
 
         abstract Event {
+            -String name
+            -Course course
+            -LocalDateTime startTime
+            -LocalDateTime endTime
+            -Location location
+            -Boolean completed
 
+            +getName()
+            +setName()
+            +getCourse()
+            +setCourse()
+            +getStartTime()
+            +setStartTime()
+            +getEndTime()
+            +setEndTime()
+            +getDuration()
+            +getLocation()
+            +setLocation()
+            +getCompleted()
+            +setCompleted()
+
+            +move()  /' Moves start and end times in unison '/
+        }
+
+        class ClassEvent extends Event {
+
+        }
+
+        class StudyEvent extends Event {
+
+        }
+
+        class ReadingEvent extends Event {
+
+        }
+
+        class AssignmentEvent extends Event {
+
+        }
+
+        class User {
+            ' Unimplemented for now
         }
 
     }  /' folder entity '/
