@@ -42,7 +42,22 @@ folder src {
         }
 
         class AssignmentEvent extends Event {
+            - String type
+            - int percentage
+            - boolean required
+            - DateTime lateDueDate
+            - double[] percentageReduction
 
+            + getType()
+            + setType()
+            + getPercentage()
+            + setPercentage()
+            + getRequired()
+            + setRequired()
+            + getLateDueDate()
+            + setLateDueDate()
+            + getPercentageReduction()
+            + setPercentageReduction()
         }
 
         class User {
