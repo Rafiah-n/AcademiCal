@@ -121,18 +121,20 @@ folder src {
             - Double longitude
             - Double latitude
 
-            + setBuildingName()
-            + setAddress()
-            + getAddress()
-            + getBuildingName()
+            + void setBuildingName()
+            + void setAddress()
+            + String getAddress()
+            + String getBuildingName()
         }
 
         class Resource{
             - String link
             - File bibTex
 
-            + setLink()
-            + getLink()
+            + void setLink()
+            + String getLink()
+            + void setBibtex
+            + File getBibtex
         }
 
     }  /' folder entity '/
