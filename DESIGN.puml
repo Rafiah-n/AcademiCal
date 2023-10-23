@@ -30,11 +30,17 @@ folder src {
         }
 
         class ClassEvent extends Event {
+            - String type
 
+            + getType()
+            + setType()
         }
 
         class StudyEvent extends Event {
+            - String[] todoList
 
+            +getToDoList()
+            +setToDoList()
         }
 
         class ReadingEvent extends Event {
@@ -62,7 +68,7 @@ folder src {
             + setType()
             + getPercentage()
             + setPercentage()
-            + getRequired()
+            + isRequired()
             + setRequired()
             + getLateDueDate()
             + setLateDueDate()
