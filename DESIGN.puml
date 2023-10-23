@@ -5,74 +5,138 @@ folder src {
     folder entity {
 
         abstract Event {
-            -String name
-            -Course course
-            -LocalDateTime startTime
-            -LocalDateTime endTime
-            -Location location
-            -Boolean completed
+            - String name
+            - Course course
+            - LocalDateTime startTime
+            - LocalDateTime endTime
+            - Location location
+            - Boolean completed
 
-            +getName()
-            +setName()
-            +getCourse()
-            +setCourse()
-            +getStartTime()
-            +setStartTime()
-            +getEndTime()
-            +setEndTime()
-            +getDuration()
-            +getLocation()
-            +setLocation()
-            +getCompleted()
-            +setCompleted()
+            + getName()
+            + setName()
+            + getCourse()
+            + setCourse()
+            + getStartTime()
+            + setStartTime()
+            + getEndTime()
+            + setEndTime()
+            + getDuration()
+            + getLocation()
+            + setLocation()
+            + getCompleted()
+            + setCompleted()
 
-            +move()  /' Moves start and end times in unison '/
+            + moveTime()  /' Moves start and end times in unison '/
         }
 
         class ClassEvent extends Event {
-        String type
-        String room
+            - String type
+
+            + getType()
+            + setType()
         }
 
         class StudyEvent extends Event {
-        String[] toDoList
+            - String[] todo
+
+            + getTodo
+            + addTodo
+            + removeTodo
         }
 
         class ReadingEvent extends Event {
+            - Resource resource
+            - Boolean required
+            - Optional<Int[]> pages
 
+            + getResource()
+            + setResource()
+            + isRequired()
+            + setRequired()
+            + getPages()
+            + addPages()
+            + removePages()
         }
 
         class AssignmentEvent extends Event {
+            - String type
+            - int percentage
+            - boolean required
+            - DateTime lateDueDate
+            - double[] percentageReduction
 
+
+            + getType()
+            + setType()
+            + getPercentage()
+            + setPercentage()
+            + isRequired()
+            + setRequired()
+            + getLateDueDate()
+            + setLateDueDate()
+            + getPercentageReduction()
+            + setPercentageReduction()
         }
 
         class User {
             ' Unimplemented for now
         }
 
-        abstract semester{
-         - LocalDate startDate
-         - LocalDate endDate
-         - String[] courses
-         - LocalDate[] holidays
-         - LocalDate[] examSeason
+        class semester{
+            - LocalDate startDate
+            - LocalDate endDate
+            - String[] courses
+            - LocalDate[] holidays
+            - LocalDate[] examSeason
 
-         + getStartDate()
-         + getEndDate()
-         + getStartDate()
-         + getStartDate()
-
+            + getStartDate()
+            + getEndDate()
+            + getHolidays()
+            + getExamSeason()
+            + setStartDate(LocalDate date)
+            + setEndDate(LocalDte date)
+            + setHolidays(LocalDate[] dates)
+            + setExamSeason(LocalDate[] dates)
         }
 
-        abstract course {
-        - ClassEvent[] classes
-        - AssignmentEvent[] assignments
-        - String courseContact
-        - Resource textbook
+        class course {
+            - ClassEvent[] classes
+            - AssignmentEvent[] assignments
+            - String courseContact
+            - Resource[] textbooks
 
+            + getClasses()
+            + getAssignments()
+            + getCourseContact()
+            + getTextbooks()
+            + setClasses(ClassEvent[] classes)
+            + setAssignments(AssignmentEvent[])
+            + setCourseContact(String contact)
+            + setTextbooks(Resource[] textbooks)
+        }
+
+        class Location{
+            - String buildingName
+            - String address
+            - Double longitude
+            - Double latitude
+
+            + setBuildingName()
+            + setAddress()
+            + getAddress()
+            + getBuildingName()
+        }
+
+        class Resource{
+            - String link
+            - File bibTex
+
+            + setLink()
+            + getLink()
         }
 
     }  /' folder entity '/
+
 
 }  /' folder src '/
 
