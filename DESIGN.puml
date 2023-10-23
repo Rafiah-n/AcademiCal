@@ -31,7 +31,7 @@ folder src {
             + void setRepeating(String repeating)
 
             ' Moves start and end times in unison
-            + void moveTime(Duration amount, Boolean forwards)
+            + void moveTime(Duration amount)  /' Negative duration values move backwards '/
             + void moveTime(LocalDate toDate)
         }
 
