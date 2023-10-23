@@ -38,7 +38,17 @@ folder src {
         }
 
         class ReadingEvent extends Event {
+            -Resource resource
+            -Boolean required
+            -Optional<Int[]> pages
 
+            +getResource()
+            +setResource()
+            +isRequired()
+            +setRequired()
+            +getPages()
+            +addPages()
+            +removePages()
         }
 
         class AssignmentEvent extends Event {
