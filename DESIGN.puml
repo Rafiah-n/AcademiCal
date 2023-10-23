@@ -72,16 +72,16 @@ folder src {
             - double[] percentageReduction
 
 
-            + getType()
-            + setType()
-            + getPercentage()
-            + setPercentage()
-            + isRequired()
-            + setRequired()
-            + getLateDueDate()
-            + setLateDueDate()
-            + getPercentageReduction()
-            + setPercentageReduction()
+            + String getType()
+            + int getPercentage()
+            + boolean isRequired()
+            + DateTime getLateDueDate()
+            + double[] getPercentageReduction()
+            + void setType(String type)
+            + void setPercentage(int percentage)
+            + void setRequired(boolean isRequired)
+            + void setLateDueDate(DateTime time)
+            + void setPercentageReduction(double[] percentageReduction)
         }
 
         class User {
