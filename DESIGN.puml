@@ -31,6 +31,7 @@ folder src {
 
         class ClassEvent extends Event {
         String type
+        String room
         }
 
         class StudyEvent extends Event {
