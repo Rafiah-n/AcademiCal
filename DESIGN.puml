@@ -71,7 +71,28 @@ folder src {
 
         }
 
+    class Location{
+        -String buildingName
+        -String address
+        -Double longitude
+        -Double latitude
+
+        + setBuildingName()
+        + setAddress()
+        + getAddress()
+        + getBuildingName()
+    }
+
+    class Resource{
+        -String link
+        -File biblex
+
+        + setLink()
+        + getLink()
+    }
+
     }  /' folder entity '/
+
 
 }  /' folder src '/
 
