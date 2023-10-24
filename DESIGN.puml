@@ -147,8 +147,8 @@ folder src {
 
             + void setLink()
             + String getLink()
-            + void setBibtex
-            + File getBibtex
+            + void setBibtex()
+            + File getBibtex()
         }
 
     }  /' folder entity '/
