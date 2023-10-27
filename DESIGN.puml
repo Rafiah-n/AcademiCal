@@ -72,16 +72,16 @@ folder src {
             - double[] percentageReduction
 
 
-            + getType()
-            + setType()
-            + getPercentage()
-            + setPercentage()
-            + isRequired()
-            + setRequired()
-            + getLateDueDate()
-            + setLateDueDate()
-            + getPercentageReduction()
-            + setPercentageReduction()
+            + String getType()
+            + int getPercentage()
+            + boolean isRequired()
+            + DateTime getLateDueDate()
+            + double[] getPercentageReduction()
+            + void setType(String type)
+            + void setPercentage(int percentage)
+            + void setRequired(boolean isRequired)
+            + void setLateDueDate(DateTime time)
+            + void setPercentageReduction(double[] percentageReduction)
         }
 
         class User {
@@ -137,6 +137,8 @@ folder src {
             + void setAddress()
             + String getAddress()
             + String getBuildingName()
+            + void setLongitude()
+            + void setLatitude()
         }
 
         class Resource{
@@ -145,8 +147,8 @@ folder src {
 
             + void setLink()
             + String getLink()
-            + void setBibtex
-            + File getBibtex
+            + void setBibtex()
+            + File getBibtex()
         }
 
     }  /' folder entity '/
