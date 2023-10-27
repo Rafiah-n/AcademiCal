@@ -1,0 +1,122 @@
+@startuml
+
+' External
+database Database
+actor User
+
+' Internal
+
+participant Main
+note over Main
+Start program here.
+end note
+
+participant ViewManagerModel
+participant ViewManager
+participant CoreViewModel
+participant CoreState
+participant EditViewModel
+participant EditState
+participant ViewModel
+
+participant UserDataAccessObject
+participant CoreUserDataAccessInterface
+participant UserFactory
+
+' Create view models (Main will also interface with Swing here)
+Main -> ViewManagerModel: create
+Main <-- ViewManagerModel: save
+
+Main -> ViewManager: create
+ViewManager -> ViewManagerModel: add property change listener
+ViewManager <-- ViewManagerModel: return control
+Main <-- ViewManager: return control without saving
+
+Main -> CoreViewModel: create
+CoreViewModel -> ViewModel: super create
+CoreViewModel <-- ViewModel: return
+CoreViewModel -> CoreState: create
+CoreViewModel <-- CoreState: save
+Main <-- CoreViewModel
+
+Main -> EditViewModel: create (popup window for editing events)
+EditViewModel -> ViewModel: super create
+EditViewModel <-- ViewModel: return
+EditViewModel -> EditState: create
+EditViewModel <-- EditState: save
+Main <-- EditViewModel
+
+' Get database to pass into classes that will query it
+' N.B. UserDataAccessObject could be CalendarDataAccessObject, or we could
+' have both, it depends on how the UML is structured with respect to the API
+Main -> Database: ask for user/calendar information
+Main <-- Database: receive information
+Main -> UserDataAccessObject: create with database access information
+UserDataAccessObject -> CoreUserDataAccessInterface: super create
+UserDataAccessObject <-- CoreUserDataAccessInterface: return
+UserDataAccessObject -> UserFactory: create
+UserDataAccessObject <-- UserFactory: return
+Main <-- UserDataAccessObject: save
+
+
+' Create Use Cases
+Main -> CoreUseCaseFactory: request CoreView
+
+/'
+CoreUseCaseFactory -> ViewManagerModel: get from Main
+CoreUseCaseFactory <-- ViewManagerModel: receive
+CoreUseCaseFactory -> CoreViewManagerModel: get from Main
+CoreUseCaseFactory <-- CoreViewManagerModel: receive
+CoreUseCaseFactory -> EditViewManagerModel: get from Main
+CoreUseCaseFactory <-- EditViewManagerModel: receive
+
+CoreUseCaseFactory -> CoreUserDataAccessInterface: get from Main
+CoreUserDataAccessInterface -> UserDataAccessObject: get from Main
+CoreUserDataAccessInterface <-- UserDataAccessObject: receive
+CoreUseCaseFactory <-- CoreUserDataAccessInterface: receive
+CoreUseCaseFactory -> EditUserDataAccessInterface: get from Main
+EditUserDataAccessInterface -> UserDataAccessObject: get from Main
+EditUserDataAccessInterface <-- UserDataAccessObject: receive
+CoreUseCaseFactory <-- EditUserDataAccessInterface: receive
+
+CoreController -> ViewManagerModel: get from CoreUseCaseFactory
+CoreController <-- ViewManagerModel: receive
+CoreController -> CoreViewModel: get from CoreUseCaseFactory
+CoreController <-- CoreViewModel: receive
+CoreController -> EditViewModel: get from CoreUseCaseFactory
+CoreController <-- EditViewModel: receive
+CoreController -> CoreUserDataAccessInterface: get from CoreUseCaseFactory
+CoreController <-- CoreUserDataAccessInterface: receive
+'/
+
+CoreUseCaseFactory -> CorePresenter: create
+' uses a bunch of arguments from CoreUseCaseFactory here
+CorePresenter -> CoreOutputBoundary: implement super
+CorePresenter <-- CoreOutputBoundary: return
+CoreUseCaseFactory <-- CorePresenter: receive (as CoreOutputBoundary)
+CoreUseCaseFactory -> UserFactory: create
+CoreUseCaseFactory <-- UserFactory: receive
+CoreUseCaseFactory -> CoreInteractor: create (using presenter, data access, and user factory)
+' Bunch of CoreUseCaseFactory arguments
+CoreInteractor -> CoreInputBoundary: implement super
+CoreInteractor <-- CoreInputBoundary: return
+CoreUseCaseFactory <-- CoreInteractor: receive
+
+CoreUseCaseFactory -> CoreController: create (using interactor)
+CoreUseCaseFactory <-- CoreController: receive
+
+CoreUseCaseFactory -> CoreView: create CoreView (using controllers and view models)
+Main <-- CoreUseCaseFactory: receive CoreView
+
+' We probably don't need an EditUseCaseFactory, we could just include
+' a method createEditUseCase() in CoreUseCaseFactory.
+Main -> EditUseCaseFactory: request EditView
+/' The process is nearly identical as for core '/
+EditUseCaseFactory -> EditView: create EditView
+EditUseCaseFactory <-- EditView: receive
+Main <-- EditUseCaseFactory: receive EditView
+
+' Turn on application
+Main -> ViewManagerModel: set active view to core
+
+@enduml
