@@ -24,7 +24,6 @@ public class Course {
     public List<Resource> getTextbooks() {
         return textbooks;
     }
-
     public void setCourseContact(String contact){
         courseContact = contact;
     }
