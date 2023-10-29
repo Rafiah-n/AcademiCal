@@ -1,0 +1,56 @@
+@startuml
+
+folder src{
+    folder use_case{
+        folder createEvent{
+            interface createEventInputBoundary{
+                +void execute()
+            }
+            class createEventInputData{
+                - String name
+                - Course course
+                - LocalDateTime startTime
+                - LocalDateTime endTime
+                - Location location
+                - Boolean completed
+                - String repeating
+
+                + createEventInputData(String name, Course course, LocalDateTime startTime,
+                                        LocalDateTime endTime, Location location, Boolean completed,
+                                        String repeating)
+                + String getName()
+                + Course getCourse()
+                + LocalDateTime getStartTime()
+                + LocalDateTime getEndTime()
+                + Location getLocation()
+                + Boolean getCompleted()
+                + String getRepeating()
+            }
+            class createEventInteractor implements createEventInputData{
+
+            }
+            interface createEventOutputBoundary{
+                + void prepareSuccessView()
+                + void prepareFailView() /' In case an event already exists, notify the user '/
+            }
+            class createEventOutputData{
+                - String name
+                - Course course
+                - LocalDateTime startTime
+                - LocalDateTime endTime
+
+                + createEventOutputData(String name, Course course, LocalDateTime startTime,
+                                        LocalDateTime endTime)
+                + String getName()
+                + Course getCourse()
+                + LocalDateTime getStartTime()
+                + LocalDateTime getEndTime()
+            }
+            interface createEventDataAccessInterface{
+                + boolean eventAlreadyExists() /' Check if the event already exists '/
+                + void save() /' Save an event to the calendar '/
+            }
+        }
+    }
+}
+@enduml
