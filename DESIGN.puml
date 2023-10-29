@@ -147,11 +147,41 @@ folder src {
 
             + void setLink()
             + String getLink()
-            + void setBibtex
-            + File getBibtex
+            + void setBibtex()
+            + File getBibtex()
         }
 
     }  /' folder entity '/
+
+    folder app{
+        class example{
+        }
+
+    } /' folder app'/
+
+    folder data_access{
+        class example{
+            }
+
+    } /' folder data_access'/
+
+    folder interface_adapters{
+        class example{
+        }
+
+    } /' folder interface_adapters'/
+
+    folder use_case{
+        class example{
+        }
+
+    } /' folder use_case'/
+
+    folder view{
+        class example{
+        }
+
+    } /' folder view'/
 
 
 }  /' folder src '/
