@@ -27,6 +27,12 @@ folder src{
                 + String getRepeating()
             }
             class createEventInteractor implements createEventInputData{
+                + Final createEventDataAccessInterface eventDataAccessObject
+                + Final createEventOutputBoundary eventOutputBoundary
+
+                + void createEventInteractor(createEvenetDataAccessInterface eventDataAccessObject,
+                                             createEventOutputBoundary eventOutputBoundary)
+                + void execute(createEventInputData eventInputData)
 
             }
             interface createEventOutputBoundary{
