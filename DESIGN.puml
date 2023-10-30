@@ -11,22 +11,28 @@ folder src {
             - LocalDateTime endTime
             - Location location
             - Boolean completed
+            - String repeating  /' weekly, monthly, daily, biweekly... '/
+                                /' could probably use a better type than String '/
 
-            + getName()
-            + setName()
-            + getCourse()
-            + setCourse()
-            + getStartTime()
-            + setStartTime()
-            + getEndTime()
-            + setEndTime()
-            + getDuration()
-            + getLocation()
-            + setLocation()
-            + getCompleted()
-            + setCompleted()
+            + String getName()
+            + void setName(String name)
+            + Course getCourse()
+            + void setCourse(Course course)
+            + LocalDateTime getStartTime()
+            + void setStartTime(LocalDateTime time)
+            + LocalDateTime getEndTime()
+            + void setEndTime(LocalDateTime time)
+            + Duration getDuration()
+            + Location getLocation()
+            + void setLocation(Location location)
+            + Boolean getCompleted()
+            + void setCompleted(Boolean completed)
+            + String getRepeating()
+            + void setRepeating(String repeating)
 
-            + moveTime()  /' Moves start and end times in unison '/
+            ' Moves start and end times in unison
+            + void moveTime(Duration amount)  /' Negative duration values move backwards '/
+            + void moveTime(LocalDate toDate)
         }
 
         class ClassEvent extends Event {
@@ -39,9 +45,9 @@ folder src {
         class StudyEvent extends Event {
             - String[] todo
 
-            + getTodo
-            + addTodo
-            + removeTodo
+            + getTodo()
+            + addTodo()
+            + removeTodo()
         }
 
         class ReadingEvent extends Event {
@@ -66,20 +72,40 @@ folder src {
             - double[] percentageReduction
 
 
-            + getType()
-            + setType()
-            + getPercentage()
-            + setPercentage()
-            + isRequired()
-            + setRequired()
-            + getLateDueDate()
-            + setLateDueDate()
-            + getPercentageReduction()
-            + setPercentageReduction()
+            + String getType()
+            + int getPercentage()
+            + boolean isRequired()
+            + DateTime getLateDueDate()
+            + double[] getPercentageReduction()
+            + void setType(String type)
+            + void setPercentage(int percentage)
+            + void setRequired(boolean isRequired)
+            + void setLateDueDate(DateTime time)
+            + void setPercentageReduction(double[] percentageReduction)
         }
 
         class User {
-            ' Unimplemented for now
+            - String name
+            - String email
+            - String password
+            - Boolean isActive
+
+            + String getName()
+            + String getEmail()
+            + String getPassword()
+            + Boolean getIsActive()
+            + void setName(String name)
+            + void setEmail(String email)
+            + void setPassword(String password)
+            + void setIsActive(Boolean isActive)
+
+            /' void encryptPw(String Password)- maybe stored in a db and used on the oAuth
+            String decryptPw(String Password)
+            void saveUser(String name, String email, String password, Boolean isActive)
+            void deleteUser(String name, String email, String password, Boolean isActive)
+            void lockUser(String name, String email, String password)
+
+            rough/potential idea of implementation for now'/
         }
 
         class semester{
@@ -89,14 +115,17 @@ folder src {
             - LocalDate[] holidays
             - LocalDate[] examSeason
 
-            + getStartDate()
-            + getEndDate()
-            + getHolidays()
-            + getExamSeason()
-            + setStartDate(LocalDate date)
-            + setEndDate(LocalDte date)
-            + setHolidays(LocalDate[] dates)
-            + setExamSeason(LocalDate[] dates)
+            + LocalDate getStartDate()
+            + LocalDate getEndDate()
+            + String[] getCourses()
+            + LocalDate[] getHolidays()
+            + LocalDate[] getExamSeason()
+            + void setStartDate(LocalDate date)
+            + void setEndDate(LocalDate date)
+            + void addHolidays(LocalDate date)
+            + void addExamSeason(LocalDate date)
+            + void deleteHolidays(LocalDate date)
+            + void deleteExamSeason(LocalDate date)
         }
 
         class course {
@@ -105,14 +134,17 @@ folder src {
             - String courseContact
             - Resource[] textbooks
 
-            + getClasses()
-            + getAssignments()
-            + getCourseContact()
-            + getTextbooks()
-            + setClasses(ClassEvent[] classes)
-            + setAssignments(AssignmentEvent[])
-            + setCourseContact(String contact)
-            + setTextbooks(Resource[] textbooks)
+            + ClassEvent[] getClasses()
+            + AssignmentEvent[] getAssignments()
+            + String getCourseContact()
+            + Resource[] getTextbooks()
+            + void addClasses(ClassEvent class)
+            + void deleteClasses(ClassEvent class)
+            + void addAssignments(AssignmentEvent[] assignment)
+            + void deleteAssignments(AssignmentEvent[] assignment)
+            + void setCourseContact(String contact)
+            + void addTextbooks(Resource textbooks)
+            + void deleteTextbooks(Resource textbooks)
         }
 
         class Location{
@@ -125,6 +157,8 @@ folder src {
             + void setAddress()
             + String getAddress()
             + String getBuildingName()
+            + void setLongitude()
+            + void setLatitude()
         }
 
         class Resource{
@@ -133,11 +167,41 @@ folder src {
 
             + void setLink()
             + String getLink()
-            + void setBibtex
-            + File getBibtex
+            + void setBibtex()
+            + File getBibtex()
         }
 
     }  /' folder entity '/
+
+    folder app{
+        class example{
+        }
+
+    } /' folder app'/
+
+    folder data_access{
+        class example{
+            }
+
+    } /' folder data_access'/
+
+    folder interface_adapters{
+        class example{
+        }
+
+    } /' folder interface_adapters'/
+
+    folder use_case{
+        class example{
+        }
+
+    } /' folder use_case'/
+
+    folder view{
+        class example{
+        }
+
+    } /' folder view'/
 
 
 }  /' folder src '/

@@ -1,0 +1,111 @@
+@startuml
+
+folder src{
+    folder use_case{
+        folder createEvent{
+            interface createEventInputBoundary{
+                +void execute()
+            }
+            class createEventInputData{
+                - String name
+                - Course course
+                - LocalDateTime startTime
+                - LocalDateTime endTime
+                - Location location
+                - Boolean completed
+                - String repeating
+
+                + createEventInputData(String name, Course course, LocalDateTime startTime,
+                                        LocalDateTime endTime, Location location, Boolean completed,
+                                        String repeating)
+                + String getName()
+                + Course getCourse()
+                + LocalDateTime getStartTime()
+                + LocalDateTime getEndTime()
+                + Location getLocation()
+                + Boolean getCompleted()
+                + String getRepeating()
+            }
+            class createEventInteractor implements createEventInputData{
+                + Final createEventDataAccessInterface eventDataAccessObject
+                + Final createEventOutputBoundary eventOutputBoundary
+
+                + void createEventInteractor(createEventDataAccessInterface eventDataAccessObject,
+                                             createEventOutputBoundary eventOutputBoundary)
+                + void execute(createEventInputData eventInputData)
+
+            }
+            interface createEventOutputBoundary{
+                + void prepareSuccessView()
+                + void prepareFailView() /' In case an event already exists, notify the user '/
+            }
+            class createEventOutputData{
+                - String name
+                - Course course
+                - LocalDateTime startTime
+                - LocalDateTime endTime
+
+                + createEventOutputData(String name, Course course, LocalDateTime startTime,
+                                        LocalDateTime endTime)
+                + String getName()
+                + Course getCourse()
+                + LocalDateTime getStartTime()
+                + LocalDateTime getEndTime()
+            }
+            interface createEventDataAccessInterface{
+                + boolean eventAlreadyExists() /' Check if the event already exists '/
+                + void save() /' Save an event to the calendar '/
+            }
+        }
+
+        folder deleteEvent{
+                    interface deleteEventInputBoundary{
+                        +void execute()
+                    }
+                    class deleteEventInputData{
+                        - String name
+                        - Course delCourse
+                        - LocalDateTime startTime
+                        - LocalDateTime endTime
+                        - Location delLocation
+                        - Boolean completed
+                        - String repeating
+
+                        + deleteEventInputData(String name, Course course, LocalDateTime startTime,
+                                                LocalDateTime endTime, Location location, Boolean completed,
+                                                String repeating)
+                        + String setName(String name)
+                        + Course setCourse(Course delcourse)
+                        + LocalDateTime setStartTime(LocalDateTime startTime)
+                        + LocalDateTime setEndTime(LocalDateTime endTime)
+                        + Location setLocation(Location delLocation)
+                        + Boolean setCompleted(Boolean completed)
+                        + String setRepeating(String repeating)
+                    }
+                    class deleteEventInteractor implements deleteEventInputData{
+                        + Final deleteEventDataAccessInterface deleteDataAccessObject
+                        + Final deleteEventOutputBoundary deleteOutputBoundary
+
+                        + void deleteEventInteractor(deleteEventDataAccessInterface eventDataAccessObject,
+                                                     createEventOutputBoundary eventOutputBoundary)
+                        + void execute(deleteEventInputData deleteInputData)
+
+                    }
+                    interface deleteEventOutputBoundary{
+                        + void prepareSuccessView()
+                        + void prepareFailView() /' In case an event doesn't exist, notify the user '/
+                    }
+                    class deleteEventOutputData{
+                        /'perhaps this could return all the events for the user - showing the one chosen has been deleted
+                        relies on the implementation of the user entity'/
+                        - Event[] allEvents()
+                    }
+                    interface createEventDataAccessInterface{
+                        + boolean eventExists(Event delEvent) /' Check if the event already exists '/
+                        + void delete(Event delEvent) /' deletes an event to the calendar '/
+                        + void deleteAll() /'maybe make a method that deletes all events for a user would have to
+                                            take in a user parameter (depends on how user entity is implemented)'/
+                    }
+    }
+}
+@enduml
