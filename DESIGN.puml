@@ -85,7 +85,27 @@ folder src {
         }
 
         class User {
-            ' Unimplemented for now
+            - String name
+            - String email
+            - String password
+            - Boolean isActive
+
+            + String getName()
+            + String getEmail()
+            + String getPassword()
+            + Boolean getIsActive()
+            + void setName(String name)
+            + void setEmail(String email)
+            + void setPassword(String password)
+            + void setIsActive(Boolean isActive)
+
+            /' void encryptPw(String Password)- maybe stored in a db and used on the oAuth
+            String decryptPw(String Password)
+            void saveUser(String name, String email, String password, Boolean isActive)
+            void deleteUser(String name, String email, String password, Boolean isActive)
+            void lockUser(String name, String email, String password)
+
+            rough/potential idea of implementation for now'/
         }
 
         class semester{
