@@ -10,6 +10,6 @@ public abstract class ViewModel {
     public String getViewName() {
         return this.viewName;
     }
-    public abstract void firePropertyChange();
+    public abstract void firePropertyChanged();
     public abstract void addPropertyChangeListener(PropertyChangeListener listener);
 }
