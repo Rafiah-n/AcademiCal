@@ -9,10 +9,10 @@ Postponed features:
   - If the user wants to change something (appearance, notification settings, date/time format or timezone) there should be a settings menu to change it, and a way to save settings upon closing the app.
   - Automatically plan and schedule studying blocks (eg. 2 weeks before the exam period, the system would create relevant events within the calendar)
 
-CORE use-case (Main workflow):
+CORE use-case (app.Main workflow):
 - User clicks import syllabus and the system opens a window asking for a file.
 - User supplies general information (course, year, semester)
-Main loop:
+app.Main loop:
   - Program opens file in a view and asks for user to click on/highlight event information (date, time, name)
   - Program creates a temporary event, and allows user to click on/highlight other information to add it to the event details
   - This user-input is how the program will be able to distinguish between potentially ambiguous information (e.g. 10-11-2023 potentially being October 11th or November 10th)
