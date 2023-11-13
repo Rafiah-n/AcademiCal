@@ -1,12 +1,12 @@
 package entity;
 
-import java.util.Optional;
+import java.util.ArrayList;
 
 public class ReadingEvent extends Event{
 
     private Resource resource;
     private boolean required;
-    private Optional<int[]> pages;
+    private ArrayList<Integer> pages = new ArrayList<>();
 
 
     public ReadingEvent(Resource resource) {
@@ -29,14 +29,18 @@ public class ReadingEvent extends Event{
         this.required = required;
     }
 
-    public Optional<int[]> getPages() {
+    public ArrayList<Integer> getPages() {
         return pages;
     }
 
-    public void setPages(Optional<int[]> pages) {
+    public void setPages(ArrayList<Integer> pages) {
         this.pages = pages;
     }
-    public void removePages(){
-        //TODO
+    public void addPage(int page){
+        pages.add(page);
+    }
+
+    public void removePage(int page){
+        pages.remove(page);
     }
 }
