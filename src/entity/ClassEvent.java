@@ -2,12 +2,12 @@ package entity;
 
 public class ClassEvent extends Event{
 
-    String type;
+    private String type;
 
     public String getType(){
         return type;
     }
-    public void setType(){
-
+    public void setType(String t){
+        type = t;
     }
 }
