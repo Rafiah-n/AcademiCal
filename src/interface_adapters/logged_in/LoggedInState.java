@@ -1,19 +1,19 @@
-package interface_adapter.logged_in;
+package interface_adapters.logged_in;
 
 public class LoggedInState {
-    private String username = "";
+    private String email = "";
 
     public LoggedInState(LoggedInState copy) {
-        username = copy.username;
+        email = copy.email;
     }
 
     // Because of the previous copy constructor, the default constructor must be explicit.
     public LoggedInState() {}
 
-    public String getUsername() {
-        return username;
+    public String getEmail() {
+        return email;
     }
-    public void setUsername(String username) {
-        this.username = username;
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
