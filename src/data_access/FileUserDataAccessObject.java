@@ -83,7 +83,7 @@ public class FileUserDataAccessObject implements LoginUserDataAccessInterface{
      * @return whether a user exists with username identifier
      */
     @Override
-    public boolean existsByName(String identifier) {
+    public boolean existsByEmail(String identifier) {
         return accounts.containsKey(identifier);
     }
 }
