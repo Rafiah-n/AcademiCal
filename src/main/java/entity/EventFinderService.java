@@ -51,6 +51,7 @@ public class EventFinderService implements EventFinder {
             }
         }
 
+        // TODO: This should be some sort of assert or something
         if (sentences.size() > 32) {
             return null;
         }
@@ -60,6 +61,7 @@ public class EventFinderService implements EventFinder {
             Map<String, List> parsedSentence;
             try {
                 parsedSentence = HanLP.parse(sentences.get(i), new String[]{"ner/ontonotes"}, new String[]{});
+                System.out.println(parsedSentence);
             } catch (IOException er) {
                 return null;
             }
