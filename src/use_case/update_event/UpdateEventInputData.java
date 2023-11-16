@@ -1,5 +1,4 @@
 package use_case.update_event;
-
 import entity.Course;
 import entity.Event;
 import entity.Location;
@@ -9,38 +8,44 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public class UpdateEventInputData {
-    private final Event event;
-    private final String newName;
-    private final Course newCourse;
-    private final LocalDateTime newStartTime;
-    private final LocalDateTime newEndTime;
-    private final Location newLocation;
-    private final Boolean newCompleted;
+    // private final Event event;
+    private String newName;
+    private Course newCourse;
+    private LocalDateTime newStartTime;
+    private LocalDateTime newEndTime;
+    private Location newLocation;
+    private Boolean newCompleted;
 
     // Additional properties for specific event types
-    private final String newAssignmentType;
-    private final Integer newAssignmentPercentage;
-    private final Boolean newAssignmentRequired;
-    private final LocalDateTime newAssignmentLateDueDate;
-    private final List<Double> newAssignmentPercentageReduction;
 
-    private final String newClassType;
+    // Assignment Event
+    private String newAssignmentType;
+    private Integer newAssignmentPercentage;
+    private Boolean newAssignmentRequired;
+    private LocalDateTime newAssignmentLateDueDate;
+    private List<Double> newAssignmentPercentageReduction;
 
-    private final Resource newReadingResource;
-    private final Boolean newReadingRequired;
-    private final List<Integer> newReadingPages;
+    // Class Event
+    private String newClassType;
 
-    private final List<String> newStudyTodo;
+
+    // Reading Event
+    private Resource newReadingResource;
+    private Boolean newReadingRequired;
+    private List<Integer> newReadingPages;
+
+    // Study Event
+    private List<String> newStudyTodo;
 
     // Constructors
-    public UpdateEventInputData(Event event, String newName, Course newCourse, LocalDateTime newStartTime,
+    public UpdateEventInputData(String newName, Course newCourse, LocalDateTime newStartTime,
                                 LocalDateTime newEndTime, Location newLocation, Boolean newCompleted,
                                 String newAssignmentType, Integer newAssignmentPercentage,
                                 Boolean newAssignmentRequired, LocalDateTime newAssignmentLateDueDate,
                                 List<Double> newAssignmentPercentageReduction, String newClassType,
                                 Resource newReadingResource, Boolean newReadingRequired,
                                 List<Integer> newReadingPages, List<String> newStudyTodo) {
-        this.event = event;
+        // this.event = event;
         this.newName = newName;
         this.newCourse = newCourse;
         this.newStartTime = newStartTime;
@@ -60,9 +65,9 @@ public class UpdateEventInputData {
     }
 
     // Getters
-    public Event getEvent() {
-        return event;
-    }
+    // public Event getEvent() {
+       // return event;
+    // }
 
     public String getNewName() {
         return newName;
@@ -128,5 +133,70 @@ public class UpdateEventInputData {
         return newStudyTodo;
     }
 
-    // Additional setters if needed
+
+    // Setters - to update
+    public void setNewName(String newName) {
+        this.newName = newName;
+    }
+
+    public void setNewCourse(Course newCourse) {
+        this.newCourse = newCourse;
+    }
+
+    public void setNewStartTime(LocalDateTime newStartTime) {
+        this.newStartTime = newStartTime;
+    }
+
+    public void setNewEndTime(LocalDateTime newEndTime) {
+        this.newEndTime = newEndTime;
+    }
+
+    public void setNewLocation(Location newLocation) {
+        this.newLocation = newLocation;
+    }
+
+    public void setNewCompleted(Boolean newCompleted) {
+        this.newCompleted = newCompleted;
+    }
+
+    public void setNewAssignmentType(String newAssignmentType) {
+        this.newAssignmentType = newAssignmentType;
+    }
+
+    public void setNewAssignmentPercentage(int newAssignmentPercentage) {
+        this.newAssignmentPercentage = newAssignmentPercentage;
+    }
+
+    public void setNewAssignmentRequired(boolean newAssignmentRequired) {
+        this.newAssignmentRequired = newAssignmentRequired;
+    }
+
+    public void setNewAssignmentLateDueDate(LocalDateTime newAssignmentLateDueDate) {
+        this.newAssignmentLateDueDate = newAssignmentLateDueDate;
+    }
+
+    public void setNewAssignmentPercentageReduction(List<Double> newAssignmentPercentageReduction) {
+        this.newAssignmentPercentageReduction = newAssignmentPercentageReduction;
+    }
+
+    public void setNewClassType(String newClassType) {
+        this.newClassType = newClassType;
+    }
+
+    public void setNewReadingResource(Resource newReadingResource) {
+        this.newReadingResource = newReadingResource;
+    }
+
+    public void setNewReadingRequired(boolean newAssignmentRequired) {
+        this.newReadingRequired = newAssignmentRequired;
+    }
+
+    public void setNewReadingPages(List<Integer> newReadingPages) {
+        this.newReadingPages = newReadingPages;
+    }
+
+    public void  setNewStudyTodo(List<String> newStudyTodo) {
+        this.newStudyTodo = newStudyTodo;
+    }
+
 }
