@@ -39,11 +39,11 @@ public class UpdateEventInputData {
 
     // Constructors
     public UpdateEventInputData(String newName, Course newCourse, LocalDateTime newStartTime,
-                                LocalDateTime newEndTime, Location newLocation, Boolean newCompleted,
-                                String newAssignmentType, Integer newAssignmentPercentage,
-                                Boolean newAssignmentRequired, LocalDateTime newAssignmentLateDueDate,
+                                LocalDateTime newEndTime, Location newLocation, boolean newCompleted,
+                                String newAssignmentType, int newAssignmentPercentage,
+                                boolean newAssignmentRequired, LocalDateTime newAssignmentLateDueDate,
                                 List<Double> newAssignmentPercentageReduction, String newClassType,
-                                Resource newReadingResource, Boolean newReadingRequired,
+                                Resource newReadingResource, boolean newReadingRequired,
                                 List<Integer> newReadingPages, List<String> newStudyTodo) {
         // this.event = event;
         this.newName = newName;
