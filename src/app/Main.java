@@ -37,13 +37,6 @@ public class Main {
             throw new RuntimeException(e);
         }
 
-        FileUserDataAccessObject clearUserDataAccessObject;
-        try {
-            clearUserDataAccessObject = new FileUserDataAccessObject("./users.csv", new CommonUserFactory());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
         LoginView loginView = LoginUseCaseFactory.create(viewManagerModel, loginViewModel, loggedInViewModel, userDataAccessObject);
         views.add(loginView, loginView.viewName);
 
