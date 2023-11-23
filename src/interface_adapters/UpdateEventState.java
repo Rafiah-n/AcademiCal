@@ -1,7 +1,6 @@
 package interface_adapters;
 
 import entity.Course;
-import entity.Event;
 import entity.Location;
 import entity.Resource;
 
@@ -73,36 +72,36 @@ public class UpdateEventState {
 
 
     public UpdateEventState(UpdateEventState copy) {
-        this.eventName = copy.eventName;
-        this.eventNameError = copy.eventNameError;
-        this.course = copy.course;
-        this.courseError = copy.courseError;
-        this.eventCompleted = copy.eventCompleted;
-        this.eventCompletedError = copy.eventCompletedError;
-        this.assignmentType = copy.assignmentType;
-        this.assignmentTypeError = copy.assignmentTypeError;
-        this.assignmentPercentage = copy.assignmentPercentage;
-        this.assignmentPercentageError = copy.assignmentPercentageError;
-        this.assignmentRequired = copy.assignmentRequired;
-        this.assignmentRequiredError = copy.assignmentRequiredError;
-        this.resource = copy.resource;
-        this.resourceError = copy.resourceError;
-        this.startTime = copy.startTime;
-        this.startTimeError = copy.startTimeError;
-        this.endTime = copy.endTime;
-        this.endTimeError = copy.endTimeError;
-        this.lateDueDate = copy.lateDueDate;
-        this.lateDueDateError = copy.lateDueDateError;
-        this.location = copy.location;
-        this.locationError = copy.locationError;
-        this.percentageReduction = copy.percentageReduction;
-        this.percentageReductionError = copy.percentageReductionError;
-        this.classType = copy.classType;
-        this.classTypeError = copy.classTypeError;
-        this.readingPages = copy.readingPages;
-        this.readingPagesError = copy.readingPagesError;
-        this.studyTodo = copy.studyTodo;
-        this.studyTodoError = copy.studyTodoError;
+        eventName = copy.eventName;
+        eventNameError = copy.eventNameError;
+        course = copy.course;
+        courseError = copy.courseError;
+        eventCompleted = copy.eventCompleted;
+        eventCompletedError = copy.eventCompletedError;
+        assignmentType = copy.assignmentType;
+        assignmentTypeError = copy.assignmentTypeError;
+        assignmentPercentage = copy.assignmentPercentage;
+        assignmentPercentageError = copy.assignmentPercentageError;
+        assignmentRequired = copy.assignmentRequired;
+        assignmentRequiredError = copy.assignmentRequiredError;
+        resource = copy.resource;
+        resourceError = copy.resourceError;
+        startTime = copy.startTime;
+        startTimeError = copy.startTimeError;
+        endTime = copy.endTime;
+        endTimeError = copy.endTimeError;
+        lateDueDate = copy.lateDueDate;
+        lateDueDateError = copy.lateDueDateError;
+        location = copy.location;
+        locationError = copy.locationError;
+        percentageReduction = copy.percentageReduction;
+        percentageReductionError = copy.percentageReductionError;
+        classType = copy.classType;
+        classTypeError = copy.classTypeError;
+        readingPages = copy.readingPages;
+        readingPagesError = copy.readingPagesError;
+        studyTodo = copy.studyTodo;
+        studyTodoError = copy.studyTodoError;
     }
 
 
