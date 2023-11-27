@@ -1,9 +1,11 @@
 package use_case.convertDoc;
 
+
 import interface_adapters.ViewManagerModel;
 import interface_adapters.convertDoc.ConvertDocPresenter;
 import interface_adapters.convertDoc.ConvertDocViewModel;
 
+import org.apache.pdfbox.Loader;
 import org.apache.pdfbox.text.PDFTextStripper;
 import org.apache.pdfbox.pdmodel.PDDocument;
 
@@ -22,20 +24,20 @@ public class ConvertDocInteractor implements convertDocInputBoundary {
 
         ConvertDocPresenter convertDocPresenter = new ConvertDocPresenter(viewManagerModel, convertDocViewModel);
 
-        String outputFile = "output.txt";
+        String outputFilepath = "./outputConversion.txt";
         boolean success = true;
-        ConvertDocOutputData outputData = new ConvertDocOutputData(outputFile, true);
+        ConvertDocOutputData outputData = new ConvertDocOutputData(outputFilepath, true);
 
         String filename = convertDocInputData.getFilename();
         String content[] = fileContent(filename);
 
         try {
-            FileWriter writer = new FileWriter(outputFile);
+            FileWriter writer = new FileWriter(outputFilepath);
             for (String line: content){
                 writer.write(line + "\n");
             }
             writer.close();
-            convertDocPresenter.prepareSuccessView(outputData);
+            convertDocPresenter.prepareSuccessView(outputFilepath);
 
         } catch(IOException e){
             convertDocPresenter.prepareFailView(e.toString());
@@ -48,10 +50,9 @@ public class ConvertDocInteractor implements convertDocInputBoundary {
         ConvertDocPresenter convertDocPresenter = new ConvertDocPresenter(viewManagerModel, convertDocViewModel);
         File fromFile = new File(filename);
 
-        try (PDDocument document = PDDocument.load(fromFile)){
+        try (PDDocument document = Loader.loadPDF(fromFile)){
             PDFTextStripper pdfTextStripper = new PDFTextStripper();
             pdfTextStripper.setStartPage(1);
-            pdfTextStripper.setEndPage(1);
 
             String[] text = (pdfTextStripper.getText(document)).split("\r\n|\r|\n");
             document.close();
