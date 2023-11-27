@@ -1,5 +1,6 @@
 package view;
 
+import data_access.FileUserDataAccessObject;
 import interface_adapters.logged_in.LoggedInState;
 import interface_adapters.logged_in.LoggedInViewModel;
 
@@ -9,6 +10,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.io.IOException;
+import java.security.GeneralSecurityException;
 
 public class LoggedInView extends JPanel implements ActionListener, PropertyChangeListener {
 
@@ -28,8 +31,13 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
 
         JLabel title = new JLabel("Logged In Screen");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
+        String events = "";
+        try {
+            events = FileUserDataAccessObject.Events();
+        } catch(IOException | GeneralSecurityException ignored) {
+        }
 
-        JLabel usernameInfo = new JLabel("Currently logged in: ");
+        JLabel usernameInfo = new JLabel(events);
         username = new JLabel();
 
         JPanel buttons = new JPanel();
