@@ -1,2 +1,4 @@
-package entity;public class RandomEvent {
+package entity;
+
+public class RandomEvent extends Event{
 }
