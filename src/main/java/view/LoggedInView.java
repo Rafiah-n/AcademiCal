@@ -31,13 +31,8 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
 
         JLabel title = new JLabel("Logged In Screen");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
-        String events = "";
-        try {
-            events = FileUserDataAccessObject.Events();
-        } catch(IOException | GeneralSecurityException ignored) {
-        }
 
-        JLabel usernameInfo = new JLabel(events);
+        JLabel usernameInfo = new JLabel(loggedInViewModel.getLoggedInUser());
         username = new JLabel();
 
         JPanel buttons = new JPanel();
