@@ -1,12 +1,16 @@
 package data_access;
 
+import entity.CommonEventFactory;
+import entity.RandomEvent;
 import entity.User;
 import entity.UserFactory;
 import use_case.login.LoginUserDataAccessInterface;
 
 import java.io.*;
 import java.security.GeneralSecurityException;
+import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.*;
 
 import com.google.api.client.auth.oauth2.Credential;
@@ -30,6 +34,7 @@ public class FileUserDataAccessObject implements LoginUserDataAccessInterface{
     private final Map<String, Integer> headers = new LinkedHashMap<>();
     private final Map<String, User> accounts = new HashMap<>();
     private static final String APPLICATION_NAME = "Google Calendar API Java Quickstart";
+    private ArrayList<entity.Event> userEvents = new ArrayList<>();
 
     private UserFactory userFactory;
     private static final JsonFactory JSON_FACTORY = GsonFactory.getDefaultInstance();
@@ -38,6 +43,11 @@ public class FileUserDataAccessObject implements LoginUserDataAccessInterface{
             Collections.singletonList(CalendarScopes.CALENDAR_READONLY);
     private static final String CREDENTIALS_FILE_PATH = "/credentials.json";
 
+    /**
+     * @param csvPath the path to the csv file.
+     * @param userFactory to create users and users to the accounts.
+     * @throws IOException if there are problems with the file.
+     */
     public FileUserDataAccessObject(String csvPath, UserFactory userFactory) throws IOException {
         this.userFactory = userFactory;
 
@@ -68,12 +78,20 @@ public class FileUserDataAccessObject implements LoginUserDataAccessInterface{
         }
     }
 
+    /**
+     * Save the user to the csv file and accounts.
+     * @param user which should be saved.
+     */
     @Override
     public void save(User user) {
         accounts.put(user.getEmail(), user);
         this.save();
     }
-
+    /**
+     * Return a user based on the email.
+     * @param email the email based on which a user is returned.
+     * @return a user.
+     */
     @Override
     public User get(String email) {return accounts.get(email);}
 
@@ -130,7 +148,13 @@ public class FileUserDataAccessObject implements LoginUserDataAccessInterface{
         return credential;
     }
 
-    public static String Events() throws IOException, GeneralSecurityException {
+    /**
+     * Returns a string with the next 10 events on user's calendar.
+     * @return a ArrayList with the next 10 events on user's calendar.
+     * @throws IOException if there are problems with HTTP_TRANSPORT.
+     * @throws GeneralSecurityException if there are problems with HTTP_TRANSPORT.
+     */
+    public ArrayList<entity.Event> Events() throws IOException, GeneralSecurityException {
         final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
         Calendar service =
                 new Calendar.Builder(HTTP_TRANSPORT, JSON_FACTORY, getCredentials(HTTP_TRANSPORT))
@@ -146,19 +170,28 @@ public class FileUserDataAccessObject implements LoginUserDataAccessInterface{
                 .setSingleEvents(true)
                 .execute();
         List<Event> items = events.getItems();
-        StringBuilder displayEvents = new StringBuilder();
         if (items.isEmpty()) {
-            displayEvents = new StringBuilder("No upcoming events.");
+            return this.userEvents;
         } else {
             for (Event event : items) {
                 DateTime start = event.getStart().getDateTime();
+                DateTime end = event.getEnd().getDateTime();
                 if (start == null) {
                     start = event.getStart().getDate();
                 }
+                if (end == null) {
+                    end = event.getEnd().getDate();
+                }
                 //System.out.printf("%s (%s)\n", event.getSummary(), start);
-                displayEvents.append(event.getSummary()).append(start).append(System.getProperty("line.separator"));
+                CommonEventFactory createEvent = new CommonEventFactory();
+                Instant instStart = Instant.parse(start.toStringRfc3339());
+                Instant instEnd = Instant.parse(end.toStringRfc3339());
+                LocalDateTime localStart = LocalDateTime.ofInstant(instStart, ZoneId.systemDefault());
+                LocalDateTime localEnd = LocalDateTime.ofInstant(instEnd, ZoneId.systemDefault());
+                entity.Event saveEvent = createEvent.create(event.getSummary(), localStart, localEnd);
+                this.userEvents.add(saveEvent);
             }
         }
-        return displayEvents.toString();
+        return this.userEvents;
     }
 }
