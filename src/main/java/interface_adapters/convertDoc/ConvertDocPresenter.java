@@ -2,32 +2,31 @@ package interface_adapters.convertDoc;
 
 import interface_adapters.ViewManagerModel;
 import use_case.convertDoc.ConvertDocOutputBoundary;
-import use_case.convertDoc.ConvertDocOutputData;
+import view.ConvertDocView;
 
 public class ConvertDocPresenter implements ConvertDocOutputBoundary {
     private final ConvertDocViewModel convertDocViewModel;
+    private ConvertDocController convertDocController;
     private ViewManagerModel viewManagerModel;
     // new view to switch to
 
     /**
-     *
      * @param viewManagerModel
      * @param convertDocViewModel
      */
     public ConvertDocPresenter(ViewManagerModel viewManagerModel,
-                          ConvertDocViewModel convertDocViewModel) {
+                               ConvertDocViewModel convertDocViewModel) {
         this.viewManagerModel = viewManagerModel;
         this.convertDocViewModel = convertDocViewModel;
     }
 
     /**
-     *
-     * @param outputData
+     * Creates a popup with the success message and the output filepath
      */
     @Override
     public void prepareSuccessView(String outputFilepath) {
-        // On success, switch to the next view and give it the filename
-        System.out.println("document converted to .txt" + outputFilepath);
+        ConvertDocView convertDocView = new ConvertDocView(convertDocController, convertDocViewModel);
+        convertDocView.showPopup("Document converted to .txt \n FILENAME:" + outputFilepath);
     }
 
     /**
@@ -39,5 +38,9 @@ public class ConvertDocPresenter implements ConvertDocOutputBoundary {
         ConvertDocState convertDocState = convertDocViewModel.getState();
         convertDocState.setConvertError(error);
         convertDocViewModel.firePropertyChanged();
+
+        ConvertDocView convertDocView = new ConvertDocView(convertDocController, convertDocViewModel);
+        convertDocView.showPopup("Problem has occurred:\n" + error);
+
     }
 }

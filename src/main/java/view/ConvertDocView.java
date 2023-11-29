@@ -107,5 +107,11 @@ public class ConvertDocView extends JPanel implements ActionListener, PropertyCh
         filepathInputField.setText(state.getFilename());
     }
 
+    public void showPopup(String Message) {
+        JPanel popupPanel = new JPanel();
+        popupPanel.add(new JLabel(Message));
+
+        JOptionPane.showMessageDialog(this, popupPanel, "Important!", JOptionPane.PLAIN_MESSAGE);
+    }
 }
 
