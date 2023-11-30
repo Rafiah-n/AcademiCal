@@ -6,8 +6,8 @@ actor User
 
 ' Internal
 
-participant Main
-note over Main
+participant app.Main
+note over app.Main
 Start program here.
 end note
 
@@ -23,59 +23,59 @@ participant UserDataAccessObject
 participant CoreUserDataAccessInterface
 participant UserFactory
 
-' Create view models (Main will also interface with Swing here)
-Main -> ViewManagerModel: create
-Main <-- ViewManagerModel: save
+' Create view models (app.Main will also interface with Swing here)
+app.Main -> ViewManagerModel: create
+app.Main <-- ViewManagerModel: save
 
-Main -> ViewManager: create
+app.Main -> ViewManager: create
 ViewManager -> ViewManagerModel: add property change listener
 ViewManager <-- ViewManagerModel: return control
-Main <-- ViewManager: return control without saving
+app.Main <-- ViewManager: return control without saving
 
-Main -> CoreViewModel: create
+app.Main -> CoreViewModel: create
 CoreViewModel -> ViewModel: super create
 CoreViewModel <-- ViewModel: return
 CoreViewModel -> CoreState: create
 CoreViewModel <-- CoreState: save
-Main <-- CoreViewModel
+app.Main <-- CoreViewModel
 
-Main -> EditViewModel: create (popup window for editing events)
+app.Main -> EditViewModel: create (popup window for editing events)
 EditViewModel -> ViewModel: super create
 EditViewModel <-- ViewModel: return
 EditViewModel -> EditState: create
 EditViewModel <-- EditState: save
-Main <-- EditViewModel
+app.Main <-- EditViewModel
 
 ' Get database to pass into classes that will query it
 ' N.B. UserDataAccessObject could be CalendarDataAccessObject, or we could
 ' have both, it depends on how the UML is structured with respect to the API
-Main -> Database: ask for user/calendar information
-Main <-- Database: receive information
-Main -> UserDataAccessObject: create with database access information
+app.Main -> Database: ask for user/calendar information
+app.Main <-- Database: receive information
+app.Main -> UserDataAccessObject: create with database access information
 UserDataAccessObject -> CoreUserDataAccessInterface: super create
 UserDataAccessObject <-- CoreUserDataAccessInterface: return
 UserDataAccessObject -> UserFactory: create
 UserDataAccessObject <-- UserFactory: return
-Main <-- UserDataAccessObject: save
+app.Main <-- UserDataAccessObject: save
 
 
 ' Create Use Cases
-Main -> CoreUseCaseFactory: request CoreView
+app.Main -> CoreUseCaseFactory: request CoreView
 
 /'
-CoreUseCaseFactory -> ViewManagerModel: get from Main
+CoreUseCaseFactory -> ViewManagerModel: get from app.Main
 CoreUseCaseFactory <-- ViewManagerModel: receive
-CoreUseCaseFactory -> CoreViewManagerModel: get from Main
+CoreUseCaseFactory -> CoreViewManagerModel: get from app.Main
 CoreUseCaseFactory <-- CoreViewManagerModel: receive
-CoreUseCaseFactory -> EditViewManagerModel: get from Main
+CoreUseCaseFactory -> EditViewManagerModel: get from app.Main
 CoreUseCaseFactory <-- EditViewManagerModel: receive
 
-CoreUseCaseFactory -> CoreUserDataAccessInterface: get from Main
-CoreUserDataAccessInterface -> UserDataAccessObject: get from Main
+CoreUseCaseFactory -> CoreUserDataAccessInterface: get from app.Main
+CoreUserDataAccessInterface -> UserDataAccessObject: get from app.Main
 CoreUserDataAccessInterface <-- UserDataAccessObject: receive
 CoreUseCaseFactory <-- CoreUserDataAccessInterface: receive
-CoreUseCaseFactory -> EditUserDataAccessInterface: get from Main
-EditUserDataAccessInterface -> UserDataAccessObject: get from Main
+CoreUseCaseFactory -> EditUserDataAccessInterface: get from app.Main
+EditUserDataAccessInterface -> UserDataAccessObject: get from app.Main
 EditUserDataAccessInterface <-- UserDataAccessObject: receive
 CoreUseCaseFactory <-- EditUserDataAccessInterface: receive
 
@@ -106,17 +106,17 @@ CoreUseCaseFactory -> CoreController: create (using interactor)
 CoreUseCaseFactory <-- CoreController: receive
 
 CoreUseCaseFactory -> CoreView: create CoreView (using controllers and view models)
-Main <-- CoreUseCaseFactory: receive CoreView
+app.Main <-- CoreUseCaseFactory: receive CoreView
 
 ' We probably don't need an EditUseCaseFactory, we could just include
 ' a method createEditUseCase() in CoreUseCaseFactory.
-Main -> EditUseCaseFactory: request EditView
+app.Main -> EditUseCaseFactory: request EditView
 /' The process is nearly identical as for core '/
 EditUseCaseFactory -> EditView: create EditView
 EditUseCaseFactory <-- EditView: receive
-Main <-- EditUseCaseFactory: receive EditView
+app.Main <-- EditUseCaseFactory: receive EditView
 
 ' Turn on application
-Main -> ViewManagerModel: set active view to core
+app.Main -> ViewManagerModel: set active view to core
 
 @enduml
