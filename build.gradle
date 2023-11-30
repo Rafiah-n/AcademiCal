@@ -14,4 +14,9 @@ repositories {
 
 dependencies {
     implementation 'com.hankcs.hanlp.restful:hanlp-restful:0.0.15'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.8.1'
+}
+
+test {
+    useJUnitPlatform()
 }
