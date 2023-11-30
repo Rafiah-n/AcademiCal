@@ -2,49 +2,66 @@ package entity;
 
 import com.hankcs.hanlp.restful.HanLPClient;
 
-import javax.swing.text.html.Option;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
 public class EventFinderService implements EventFinder {
 
     /**
-     * TODO: Write a proper doc
-     * Text should not be more than 32 sentences long.
+     * Returns a {@link FoundEvent} object that can then be stored or used to
+     * display information.
+     * The text argument must be less than 5000 characters. The span argument
+     * must be a list of two elements that match the start and end points of
+     * the inputted text (or highlight) from where the text was drawn.
+     * <p>
+     * This message uses the HanLP API, and HANLP_AUTH_KEY must be specified in
+     * your environment for it to work. The method will throw an error
+     * otherwise. HANLP_AUTH_KEY can be null, but functionality will be
+     * limited.
+     *
+     * @param  text an absolute URL giving the base location of the image
+     * @param  span the location of the image, relative to the url argument
+     * @return      the image at the specified URL
+     * @see         EventFinder
+     * @see         FoundEvent
+     * @see         HanLPClient
      */
     @Override
     public FoundEvent findEvent(String text, List<Integer> span) {
-        // Some ideas:
-        // - Since we can't process too much information, we might want to ask the user to highlight and event, and then
-        //   our program will automatically transform *that* into an event. This would help get around the limit of 14
-        //   API calls per minute, and it would also get around the sentence splitting aspect.
-
-        // TODO: This should be some sort of assert or something
         if (text.length() > 5000) {
-            return null;
+            throw new IllegalArgumentException("Text length should not exceed 5000 characters");
         }
 
         // Create client
-        HanLPClient HanLP = new HanLPClient("https://hanlp.hankcs.com/api", System.getenv("HANLP_AUTH_KEY"));
-        Map<String, List> parsedText;
-        Event event = new Event();
-
+        HanLPClient HanLP;
         try {
-            parsedText = HanLP.parse(text, new String[]{"ner/msra"}, new String[]{});
-            System.out.println(parsedText);
-        } catch (IOException er) {
-            return null;
+            HanLP = new HanLPClient("https://hanlp.hankcs.com/api",
+                    System.getenv("HANLP_AUTH_KEY"));
+        } catch (NullPointerException er) {
+            er.printStackTrace();
+            throw new RuntimeException("HANLP_AUTH_KEY is undefined. This should not happen in production, ever. " +
+                    "If it does, contact Leo Peckham");
         }
 
-        // Create event
+        Map<String, List> parsedText;
+        try {
+            parsedText = HanLP.parse(text, new String[]{"ner/msra"}, new String[]{});
+        } catch (IOException er) {
+            er.printStackTrace();  // TODO: this should print to a log file
+            throw new RuntimeException("Failed to parse text in findEvent. This should not happen, and if it does, " +
+                    "please file a bug report.");
+        }
+
+        Event event = new Event();
+
+        if (parsedText.get("ner/msra").isEmpty()) return new FoundEvent(event, span);
+
         if (parsedText.get("ner/msra").get(0) instanceof List<?> parsedSentence) {
             for (Object namedEntity : parsedSentence) {
                 if (namedEntity instanceof List<?> namedEntityArray) {
                     OptionalTime optStartTime = event.getOptStartTime();
-                    OptionalTime optEndTime   = event.getOptEndTime();
+                    OptionalTime optEndTime = event.getOptEndTime();
 
                     OptionalTime remainder = optStartTime.merge(new OptionalTime((String) namedEntityArray.get(0)));
                     optEndTime.merge(remainder);
