@@ -25,9 +25,9 @@ public class OptionalTime {
     private Optional<Integer> year       = Optional.empty();
 
     private static final Pattern twelveHourMatch = Pattern.compile(
-            "(0?[1-9]|1[0-2])[:h]([0-5]\\d)?(?:[:.m][0-5]\\d)?\\w?(am|pm)", Pattern.CASE_INSENSITIVE);
+            "(0?[1-9]|1[0-2])[:h]?([0-5]\\d)?(?:[:.m][0-5]\\d)?\\w?(am|pm)", Pattern.CASE_INSENSITIVE);
     private static final Pattern twentyFourHourMatch = Pattern.compile(
-            "([0-1]?\\d|2[0-3])[:h]([0-5]\\d)?(?:[:.m][0-5]\\d)?", Pattern.CASE_INSENSITIVE);
+            "([0-1]?\\d|2[0-3])[:h]?([0-5]\\d)?(?:[:.m][0-5]\\d)?", Pattern.CASE_INSENSITIVE);
     private static final Pattern dayOfMonthMatch = Pattern.compile("([0-2]?\\d|3[0-1])(?:st|nd|rd|th)?");
     private static final Pattern monthMatch = Pattern.compile(
             "(jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|may|june?|july?|aug(?:ust)?|sep(?:tember)?|oct(?:ober)?|nov(?:ember)?|dec(?:ember)?)", Pattern.CASE_INSENSITIVE);
@@ -48,7 +48,8 @@ public class OptionalTime {
         if (twelveHourMatcher.find()) {
             System.out.println(twelveHourMatcher.namedGroups());
             hour = Optional.of(Integer.parseInt(twelveHourMatcher.group(1)));
-            if (!Objects.equals(twelveHourMatcher.group(2), "")) {
+            if (twelveHourMatcher.group(2) != null) {
+                System.out.println(twelveHourMatcher.group(2));
                 minute = Optional.of(Integer.parseInt(twelveHourMatcher.group(2)));
             }
             if (twelveHourMatcher.group(3).matches("(?i)am")) {
@@ -62,7 +63,7 @@ public class OptionalTime {
             }
         } else if (twentyFourHourMatcher.find()) {
             hour = Optional.of(Integer.parseInt(twentyFourHourMatcher.group(1)));
-            if (!Objects.equals(twentyFourHourMatcher.group(2), "")) {
+            if (twentyFourHourMatcher.group(2) != null) {
                 minute = Optional.of(Integer.parseInt(twentyFourHourMatcher.group(2)));
             }
         // month
@@ -114,11 +115,22 @@ public class OptionalTime {
                 hour.orElse(DEFAULT_HOUR), minute.orElse(DEFAULT_MINUTE), DEFAULT_SECOND, DEFAULT_NANO);
     }
 
-    public void merge(OptionalTime other) {
-        if (other.year.isPresent())       year       = other.year;
-        if (other.month.isPresent())      month      = other.month;
-        if (other.dayOfMonth.isPresent()) dayOfMonth = other.dayOfMonth;
-        if (other.hour.isPresent())       hour       = other.hour;
-        if (other.minute.isPresent())     minute     = other.minute;
+    public OptionalTime merge(OptionalTime other) {
+        OptionalTime ret = new OptionalTime("");
+
+        if (year.isPresent()       && other.year.isPresent())       ret.year = other.year;
+        if (month.isPresent()      && other.month.isPresent())      ret.month = other.month;
+        if (dayOfMonth.isPresent() && other.dayOfMonth.isPresent()) ret.dayOfMonth = other.dayOfMonth;
+        if (hour.isPresent()       && other.hour.isPresent())       ret.hour = other.hour;
+        if (minute.isPresent()     && other.minute.isPresent())     ret.minute = other.minute;
+
+        if (year.isEmpty()       && other.year.isPresent())       year       = other.year;
+        if (month.isEmpty()      && other.month.isPresent())      month      = other.month;
+        if (dayOfMonth.isEmpty() && other.dayOfMonth.isPresent()) dayOfMonth = other.dayOfMonth;
+        if (hour.isEmpty()       && other.hour.isPresent())       hour       = other.hour;
+        if (minute.isEmpty()     && other.minute.isPresent())     minute     = other.minute;
+
+        return ret;
     }
+
 }

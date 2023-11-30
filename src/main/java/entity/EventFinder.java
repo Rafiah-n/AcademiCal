@@ -4,6 +4,6 @@ import java.util.List;
 
 public interface EventFinder {
 
-    public List<FoundEvent> findEvents(String text);
+    public FoundEvent findEvent(String text, List<Integer> span);
 
 }
