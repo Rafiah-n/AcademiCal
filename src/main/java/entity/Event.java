@@ -1,11 +1,14 @@
 package entity;
 
 import java.time.*;
+import java.util.Optional;
 
-public abstract class Event {
+public class Event {
     private String name;
     private Course course;
+    private OptionalTime optStartTime = new OptionalTime("");
     private LocalDateTime startTime;
+    private OptionalTime optEndTime   = new OptionalTime("");
     private LocalDateTime endTime;
     private Location location;
     private boolean completed;
@@ -33,11 +36,25 @@ public abstract class Event {
         course = c;
     }
 
+    public OptionalTime getOptStartTime() {
+        return optStartTime;
+    }
+    public void setOptStartTime(OptionalTime optStartTime) {
+        this.optStartTime = optStartTime;
+    }
+
     public LocalDateTime getStartTime() {
         return startTime;
     }
     public void setStartTime(LocalDateTime time){
         startTime = time;
+    }
+
+    public OptionalTime getOptEndTime() {
+        return optEndTime;
+    }
+    public void setOptEndTime(OptionalTime optEndTime) {
+        this.optEndTime = optEndTime;
     }
 
     public LocalDateTime getEndTime() {
@@ -59,5 +76,19 @@ public abstract class Event {
     }
     public void setCompleted(boolean compl){
         completed = compl;
+    }
+
+    @Override
+    public String toString() {
+        return "Event{" +
+                "name='" + name + '\'' +
+                ", course=" + course +
+                ", optStartTime=" + optStartTime.generateTime() +
+                ", startTime=" + startTime +
+                ", optEndTime=" + optEndTime.generateTime() +
+                ", endTime=" + endTime +
+                ", location=" + location +
+                ", completed=" + completed +
+                '}';
     }
 }
