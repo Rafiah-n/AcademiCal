@@ -11,7 +11,16 @@ public class Event {
     private OptionalTime optEndTime   = new OptionalTime("");
     private LocalDateTime endTime;
     private Location location;
-    private Boolean completed;
+    private boolean completed;
+
+    public Event(String name, Course course, LocalDateTime startTime, LocalDateTime endTime, Location location,
+                 boolean completed){
+        this.name = name;
+        this.course = course;
+        this.startTime =startTime;
+        this.endTime = endTime;
+        this.completed = completed;
+    }
 
     public String getName() {
         return name;
