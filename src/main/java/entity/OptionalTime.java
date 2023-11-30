@@ -9,6 +9,19 @@ import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * The {@code OptionalTime} class represents an optional date and time, allowing
+ * for partial or complete specification of minute, hour, day of month, month, and year.
+ * <p>
+ * It provides methods to parse a string representation of a time and generate a
+ * {@code LocalDateTime} object, as well as merge with another {@code OptionalTime} instance.
+ * <p>
+ * Default values are provided for unspecified fields.
+ *
+ * @author Leo (padril) Peckham
+ * @version 1.0
+ * @see LocalDateTime
+ */
 public class OptionalTime {
     final private static int   DEFAULT_NANO         = 0;   // should not be a field editable by user
     final private static int   DEFAULT_SECOND       = 0;   // should not be a field editable by user
@@ -33,6 +46,19 @@ public class OptionalTime {
             "(jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|may|june?|july?|aug(?:ust)?|sep(?:tember)?|oct(?:ober)?|nov(?:ember)?|dec(?:ember)?)", Pattern.CASE_INSENSITIVE);
     private static final Pattern yearMatch = Pattern.compile("((?:19|20)\\d{2})");
 
+    /**
+     * Constructs an {@code OptionalTime} instance by parsing the provided string
+     * representation of time and populating the relevant fields.
+     * <p>
+     * The parsing supports various formats, including twelve-hour and twenty-four-hour
+     * time, month abbreviations, and numerical day of month and year representations.
+     * <p>
+     * Default values are used for unspecified fields, and incomplete date information
+     * can be later merged with another {@code OptionalTime} instance.
+     *
+     * @param string the string representation of time to parse
+     * @see LocalDateTime
+     */
     public OptionalTime(String string) {
         if (string.isBlank()) {
             return;
@@ -109,12 +135,29 @@ public class OptionalTime {
         this.year = year;
     }
 
+    /**
+     * Generates a {@code LocalDateTime} object based on the specified or default values
+     * for year, month, day of month, hour, minute, and second.
+     *
+     * @return a {@code LocalDateTime} object representing the generated date and time
+     * @see LocalDateTime
+     */
     public LocalDateTime generateTime() {
         return LocalDateTime.of(
                 year.orElse(DEFAULT_YEAR), month.orElse(DEFAULT_MONTH), dayOfMonth.orElse(DEFAULT_DAY_OF_MONTH),
                 hour.orElse(DEFAULT_HOUR), minute.orElse(DEFAULT_MINUTE), DEFAULT_SECOND, DEFAULT_NANO);
     }
 
+    /**
+     * Merges the fields of this {@code OptionalTime} instance with another,
+     * prioritizing values from the other instance when available.
+     * <p>
+     * Returns the values that went unused wrapped in an OptionalTime, so they
+     * can be reused and chained together.
+     *
+     * @param other the {@code OptionalTime} instance to merge with
+     * @return a new {@code OptionalTime} instance representing the merged values
+     */
     public OptionalTime merge(OptionalTime other) {
         OptionalTime ret = new OptionalTime("");
 

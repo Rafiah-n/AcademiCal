@@ -6,7 +6,24 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-public class EventFinderService implements EventFinder {
+/**
+ * The {@code EventFinderService} class implements the {@code EventFinder}
+ * interface and provides a method for extracting event information from a
+ * given text using theHanLP API.
+ * <p>
+ * This class relies on the HanLP API for named entity recognition (NER) to identify and extract
+ * temporal information related to events from the input text.
+ * <p>
+ * Note: To use this service, the HANLP_AUTH_KEY environment variable must be set. See findEvent
+ * for details
+ *
+ * @author Leo (padril) Peckham
+ * @version 1.0
+ * @see EventFinder
+ * @see FoundEvent
+ * @see HanLPClient
+ */
+public final class EventFinderService implements EventFinder {
 
     /**
      * Returns a {@link FoundEvent} object that can then be stored or used to
