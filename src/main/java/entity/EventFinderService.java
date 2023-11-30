@@ -3,6 +3,7 @@ package entity;
 import com.hankcs.hanlp.restful.HanLPClient;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
@@ -70,7 +71,7 @@ public final class EventFinderService implements EventFinder {
                     "please file a bug report.");
         }
 
-        Event event = new Event();
+        Event event = new Event("", new Course(), LocalDateTime.now(), LocalDateTime.now(), new Location(), false);
 
         if (parsedText.get("ner/msra").isEmpty()) return new FoundEvent(event, span);
 
