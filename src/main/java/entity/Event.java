@@ -22,6 +22,10 @@ public class Event {
         this.completed = completed;
     }
 
+    public Event() {
+
+    }
+
     public String getName() {
         return name;
     }

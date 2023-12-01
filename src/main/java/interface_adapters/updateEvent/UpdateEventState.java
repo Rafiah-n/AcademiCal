@@ -21,8 +21,7 @@ public class UpdateEventState {
 
     private boolean eventCompleted;
 
-    private boolean eventCompletedError = Boolean.parseBoolean(null);
-
+    private Boolean eventCompletedError = null;
 
     private String assignmentType = "";
 
@@ -30,11 +29,11 @@ public class UpdateEventState {
 
     private int assignmentPercentage;
 
-    private int assignmentPercentageError = Integer.parseInt(null);
+    private int assignmentPercentageError;
 
     private boolean assignmentRequired;
 
-    private boolean assignmentRequiredError = Boolean.parseBoolean(null);
+    private boolean assignmentRequiredError;
 
     private Resource resource;
 

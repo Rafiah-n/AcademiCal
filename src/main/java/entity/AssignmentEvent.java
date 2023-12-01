@@ -21,6 +21,10 @@ public class AssignmentEvent extends Event{
         this.lateDueDate = lateDueDate;
     }
 
+    public AssignmentEvent() {
+
+    }
+
 
     public String getType(){
         return type;
