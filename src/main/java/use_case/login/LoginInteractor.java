@@ -1,6 +1,11 @@
 package use_case.login;
 
+import entity.Event;
 import entity.User;
+
+import java.io.IOException;
+import java.security.GeneralSecurityException;
+import java.util.ArrayList;
 
 public class LoginInteractor implements LoginInputBoundary{
     final LoginUserDataAccessInterface userDataAccessObject;
@@ -24,10 +29,19 @@ public class LoginInteractor implements LoginInputBoundary{
                 loginPresenter.prepareFailView("Incorrect email or password.");
             } else {
                 User user = userDataAccessObject.get(loginInputData.getEmail());
-
-                LoginOutputData loginOutputData = new LoginOutputData(user.getEmail(), false);
-                loginPresenter.prepareSuccessView(loginOutputData);
+                ArrayList<Event> userEvents = null;
+                try {
+                    userEvents = userDataAccessObject.Events();
+                } catch (IOException | GeneralSecurityException ignored) {
+                }
+                ArrayList<String> nameEvents = new ArrayList<>();
+                assert userEvents != null;
+                for(Event event: userEvents) {
+                    nameEvents.add(event.getName());
+                }
+                LoginOutputData loginOutputData = new LoginOutputData(user.getEmail(), false, nameEvents);
+                    loginPresenter.prepareSuccessView(loginOutputData);
+                }
             }
-        }
     }
 }

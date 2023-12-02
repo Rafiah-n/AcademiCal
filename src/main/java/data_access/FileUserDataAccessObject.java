@@ -1,7 +1,6 @@
 package data_access;
 
 import entity.CommonEventFactory;
-import entity.RandomEvent;
 import entity.User;
 import entity.UserFactory;
 import use_case.login.LoginUserDataAccessInterface;
@@ -34,7 +33,7 @@ public class FileUserDataAccessObject implements LoginUserDataAccessInterface{
     private final Map<String, Integer> headers = new LinkedHashMap<>();
     private final Map<String, User> accounts = new HashMap<>();
     private static final String APPLICATION_NAME = "Google Calendar API Java Quickstart";
-    private ArrayList<entity.Event> userEvents = new ArrayList<>();
+    private final ArrayList<entity.Event> userEvents = new ArrayList<>();
 
     private UserFactory userFactory;
     private static final JsonFactory JSON_FACTORY = GsonFactory.getDefaultInstance();
@@ -154,6 +153,7 @@ public class FileUserDataAccessObject implements LoginUserDataAccessInterface{
      * @throws IOException if there are problems with HTTP_TRANSPORT.
      * @throws GeneralSecurityException if there are problems with HTTP_TRANSPORT.
      */
+    @Override
     public ArrayList<entity.Event> Events() throws IOException, GeneralSecurityException {
         final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
         Calendar service =
@@ -188,7 +188,8 @@ public class FileUserDataAccessObject implements LoginUserDataAccessInterface{
                 Instant instEnd = Instant.parse(end.toStringRfc3339());
                 LocalDateTime localStart = LocalDateTime.ofInstant(instStart, ZoneId.systemDefault());
                 LocalDateTime localEnd = LocalDateTime.ofInstant(instEnd, ZoneId.systemDefault());
-                entity.Event saveEvent = createEvent.create(event.getSummary(), localStart, localEnd);
+                String location = event.getLocation();
+                entity.Event saveEvent = createEvent.create(event.getSummary(), localStart, localEnd, location, false);
                 this.userEvents.add(saveEvent);
             }
         }

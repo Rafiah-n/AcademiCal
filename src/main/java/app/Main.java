@@ -2,8 +2,6 @@ package app;
 
 import data_access.FileUserDataAccessObject;
 import entity.CommonUserFactory;
-import entity.EventFinder;
-import entity.EventFinderService;
 import interface_adapters.ViewManagerModel;
 import interface_adapters.logged_in.LoggedInViewModel;
 import interface_adapters.login.LoginViewModel;
@@ -47,10 +45,5 @@ public class Main {
 
         application.pack();
         application.setVisible(true);
-
-        EventFinder ef = new EventFinderService();
-
-        System.out.println(ef.findEvents(
-                "Your classes will be weekly on Fridays at 2:00pm. Tests will be every other Thursday."));
     }
 }

@@ -1,8 +1,8 @@
 package view;
 
-import data_access.FileUserDataAccessObject;
 import interface_adapters.logged_in.LoggedInState;
 import interface_adapters.logged_in.LoggedInViewModel;
+import data_access.FileUserDataAccessObject;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,17 +10,20 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.io.IOException;
-import java.security.GeneralSecurityException;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class LoggedInView extends JPanel implements ActionListener, PropertyChangeListener {
 
     public final String viewName = "logged in";
     private final LoggedInViewModel loggedInViewModel;
 
-    JLabel username;
+    JComboBox<String> cb;
 
     final JButton logOut;
+    final JButton create;
+    final JButton update;
+    final JButton delete;
 
     /**
      * A window with a title and a JButton.
@@ -29,15 +32,26 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
         this.loggedInViewModel = loggedInViewModel;
         this.loggedInViewModel.addPropertyChangeListener(this);
 
+
         JLabel title = new JLabel("Logged In Screen");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         JLabel usernameInfo = new JLabel(loggedInViewModel.getLoggedInUser());
-        username = new JLabel();
+
+        JLabel text = new JLabel("Please choose one of the following events to modify");
+        text.setAlignmentX(Component.LEFT_ALIGNMENT);
+        cb = new JComboBox<>();
 
         JPanel buttons = new JPanel();
         logOut = new JButton(loggedInViewModel.LOGOUT_BUTTON_LABEL);
+        create = new JButton(loggedInViewModel.CREATE_BUTTON_LABEL);
+        update = new JButton(loggedInViewModel.UPDATE_BUTTON_LABEL);
+        delete = new JButton(loggedInViewModel.DELETE_BUTTON_LABEL);
+
         buttons.add(logOut);
+        buttons.add(create);
+        buttons.add(update);
+        buttons.add(delete);
 
         logOut.addActionListener(this);
 
@@ -45,7 +59,8 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
 
         this.add(title);
         this.add(usernameInfo);
-        this.add(username);
+        this.add(text);
+        this.add(cb);
         this.add(buttons);
     }
 
@@ -59,6 +74,11 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         LoggedInState state = (LoggedInState) evt.getNewValue();
-        username.setText(state.getEmail());
+        setDropMenu(state);
+    }
+
+    private void setDropMenu(LoggedInState state) {
+        DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>(state.getUserEvents().toArray(new String[0]));
+        cb.setModel(model);
     }
 }
