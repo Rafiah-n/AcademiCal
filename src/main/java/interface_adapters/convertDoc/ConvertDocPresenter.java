@@ -11,8 +11,10 @@ public class ConvertDocPresenter implements ConvertDocOutputBoundary {
     // new view to switch to
 
     /**
-     * @param viewManagerModel
-     * @param convertDocViewModel
+     * Constructs new ConvertDocPresenter with the parametrs ViewManagerModel and ConvertDocViewModel.
+     *
+     * @param viewManagerModel used to manage views.
+     * @param convertDocViewModel used to handle the view state.
      */
     public ConvertDocPresenter(ViewManagerModel viewManagerModel,
                                ConvertDocViewModel convertDocViewModel) {
@@ -22,6 +24,8 @@ public class ConvertDocPresenter implements ConvertDocOutputBoundary {
 
     /**
      * Creates a popup with the success message and the output filepath
+     *
+     * @param outputFilepath The filepath of the successfully converted document.
      */
     @Override
     public void prepareSuccessView(String outputFilepath) {
@@ -30,8 +34,9 @@ public class ConvertDocPresenter implements ConvertDocOutputBoundary {
     }
 
     /**
+     * Creates a popup with the failure message and error details
      *
-     * @param error
+     * @param error error message indicating the problem during document conversion.
      */
     @Override
     public void prepareFailView(String error) {

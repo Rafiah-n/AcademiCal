@@ -17,6 +17,13 @@ public class ConvertDocInteractor implements convertDocInputBoundary {
     private String filepath;
     private File file;
 
+    /**
+     * Executes the document conversion process, calls method fileContent
+     * Writes this content to an output file.
+     * Catches any errors and sends it to the prepareFailView method
+     *
+     * @param convertDocInputData the input data for the document conversion.
+     */
     @Override
     public void execute(ConvertDocInputData convertDocInputData) {
         ViewManagerModel viewManagerModel = new ViewManagerModel();
@@ -44,6 +51,14 @@ public class ConvertDocInteractor implements convertDocInputBoundary {
         }
 
     }
+
+    /**
+     * Reads the content of a PDF file and returns it as an array of strings.
+     * Catches any errors and sends it to the prepareFailView method
+     *
+     * @param filename The filename of the PDF document.
+     * @return An array of strings representing the content of the PDF document.
+     */
     private String[] fileContent(String filename) {
         ViewManagerModel viewManagerModel = new ViewManagerModel();
         ConvertDocViewModel convertDocViewModel = new ConvertDocViewModel();

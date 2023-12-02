@@ -22,7 +22,12 @@ public class ConvertDocView extends JPanel implements ActionListener, PropertyCh
     final JButton convert;
     final JButton cancel;
 
-
+    /**
+     * Constructs a new ConvertDocView with the specified controller and ViewModel.
+     *
+     * @param controller the controller for the Convert Doc use case.
+     * @param convertDocViewModel the ViewModel associated with this view.
+     */
     public ConvertDocView(ConvertDocController controller, ConvertDocViewModel convertDocViewModel) {
         this.convertDocController = controller;
         this.convertDocViewModel = convertDocViewModel;
@@ -97,21 +102,38 @@ public class ConvertDocView extends JPanel implements ActionListener, PropertyCh
 
     /**
      * React to a button click that results in evt.
+     *
+     * @param evt The ActionEvent associated with the button click.
      */
     public void actionPerformed(ActionEvent evt) {
         JOptionPane.showConfirmDialog(this, "Click" + evt.getActionCommand());
     }
 
+    /**
+     * Handles property change events, updating the view based on the changes in the ViewModel.
+     *
+     * @param evt The PropertyChangeEvent associated with the change in the ViewModel.
+     */
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         ConvertDocState state = (ConvertDocState) evt.getNewValue();
         setFields(state);
     }
 
+    /**
+     * Sets the fields of the view based on the provided ConvertDocState.
+     *
+     * @param state the ConvertDocState containing the data to be displayed.
+     */
     private void setFields(ConvertDocState state) {
         filepathInputField.setText(state.getFilename());
     }
 
+    /**
+     * Displays a popup with the specified message.
+     *
+     * @param Message the message to be displayed in the popup.
+     */
     public void showPopup(String Message) {
         JPanel popupPanel = new JPanel();
         popupPanel.add(new JLabel(Message));
