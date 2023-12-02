@@ -1,7 +1,7 @@
-package data_access;
+package main.java.data_access;
 
-import entity.User;
-import entity.UserFactory;
+import main.java.entity.User;
+import main.java.entity.UserFactory;
 import use_case.login.LoginUserDataAccessInterface;
 
 import java.io.*;

@@ -1,4 +1,4 @@
-package interface_adapters.login;
+package main.java.interface_adapters.login;
 
 public class LoginState {
     private String email = "";

@@ -1,7 +1,7 @@
-package app;
+package main.java.app;
 
-import data_access.FileUserDataAccessObject;
-import entity.CommonUserFactory;
+import main.java.data_access.FileUserDataAccessObject;
+import main.java.entity.CommonUserFactory;
 import interface_adapters.ViewManagerModel;
 import interface_adapters.logged_in.LoggedInViewModel;
 import interface_adapters.login.LoginViewModel;

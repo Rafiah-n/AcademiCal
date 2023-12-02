@@ -1,4 +1,4 @@
-package interface_adapters.login;
+package main.java.interface_adapters.login;
 
 import use_case.login.LoginInputBoundary;
 import use_case.login.LoginInputData;

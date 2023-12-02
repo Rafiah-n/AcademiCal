@@ -1,4 +1,4 @@
-package entity;
+package main.java.entity;
 
 public interface PasswordValidator {
     public boolean passwordIsValid(String password);

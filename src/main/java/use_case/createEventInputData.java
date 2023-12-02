@@ -1,6 +1,6 @@
-package use_case;
+package main.java.use_case;
 
-import entity.*;
+import main.java.entity.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

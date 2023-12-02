@@ -1,7 +1,7 @@
-package app;
+package main.java.app;
 
-import entity.CommonUserFactory;
-import entity.UserFactory;
+import main.java.entity.CommonUserFactory;
+import main.java.entity.UserFactory;
 import interface_adapters.ViewManagerModel;
 import interface_adapters.logged_in.LoggedInViewModel;
 import interface_adapters.login.LoginController;

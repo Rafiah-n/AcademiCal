@@ -1,4 +1,4 @@
-package interface_adapters.logged_in;
+package main.java.interface_adapters.logged_in;
 
 public class LoggedInState {
     private String email = "";

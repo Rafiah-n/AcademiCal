@@ -1,10 +1,6 @@
-package use_case;
+package main.java.use_case;
 
-import entity.Event;
-import entity.StudyEvent;
-import entity.ClassEvent;
-import entity.ReadingEvent;
-import entity.AssignmentEvent;
+import main.java.entity.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

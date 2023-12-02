@@ -1,4 +1,4 @@
-package interface_adapters.logged_in;
+package main.java.interface_adapters.logged_in;
 
 import interface_adapters.ViewModel;
 

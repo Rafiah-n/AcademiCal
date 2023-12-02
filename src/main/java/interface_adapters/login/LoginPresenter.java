@@ -1,8 +1,8 @@
-package interface_adapters.login;
+package main.java.interface_adapters.login;
 
 import interface_adapters.ViewManagerModel;
-import interface_adapters.logged_in.LoggedInState;
-import interface_adapters.logged_in.LoggedInViewModel;
+import main.java.interface_adapters.logged_in.LoggedInState;
+import main.java.interface_adapters.logged_in.LoggedInViewModel;
 import use_case.login.LoginOutputBoundary;
 import use_case.login.LoginOutputData;
 

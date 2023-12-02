@@ -1,6 +1,6 @@
-package use_case.login;
+package main.java.use_case.login;
 
-import entity.User;
+import main.java.entity.User;
 
 public interface LoginUserDataAccessInterface {
     boolean existsByEmail(String identifier);

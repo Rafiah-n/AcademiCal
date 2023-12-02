@@ -1,6 +1,6 @@
-package use_case.login;
+package main.java.use_case.login;
 
-import interface_adapters.logged_in.LoggedInState;
+import main.java.interface_adapters.logged_in.LoggedInState;
 
 public class LoginOutputData {
     private final String email;
