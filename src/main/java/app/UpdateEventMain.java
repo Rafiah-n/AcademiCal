@@ -30,9 +30,13 @@ public class UpdateEventMain {
 
         UpdateEventDataAccessObject updateEventDataAccessObject;
         updateEventDataAccessObject = new UpdateEventDataAccessObject();
-        AssignmentEvent event = new AssignmentEvent("CSC207", new Course(), null, null,
-               new Location() , false, "LEC", 15, true, null);
+        Course course = new Course();
+        course.setCourseContact("Ugur");
 
+        Location location = new Location("buildingName","Address",12.12,12.0);
+        AssignmentEvent event = new AssignmentEvent("CSC207", course, LocalDateTime.now(), LocalDateTime.now(),location,
+                false, "Assignment", 15, true, LocalDateTime.now());
+        updateEventViewModel.getState().setEvent(event);
         UpdateEventView updateEventView = UpdateEventUseCaseFactory.create(viewManagerModel, updateEventViewModel, updateEventDataAccessObject,event);
         views.add(updateEventView, updateEventView.viewName);
 

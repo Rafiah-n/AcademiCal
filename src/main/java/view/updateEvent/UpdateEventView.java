@@ -4,6 +4,7 @@ import entity.AssignmentEvent;
 import entity.ClassEvent;
 import entity.Event;
 import entity.ReadingEvent;
+import interface_adapters.login.LoginState;
 import interface_adapters.updateEvent.UpdateEventController;
 import interface_adapters.updateEvent.UpdateEventState;
 import interface_adapters.updateEvent.UpdateEventViewModel;
@@ -17,11 +18,17 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
+import java.util.Date;
 
 public class UpdateEventView extends JPanel implements ActionListener, PropertyChangeListener {
 
     public final String viewName = "Update Event";
     private UpdateEventViewModel updateEventViewModel;
+
+    private UpdateEventController updateEventController;
 
     final JTextField eventNameInputField = new JTextField(20);
     private final JLabel eventNameErrorField = new JLabel();
@@ -40,14 +47,34 @@ public class UpdateEventView extends JPanel implements ActionListener, PropertyC
 
     final JCheckBox completedCheckBox = new JCheckBox("Completed");
 
+    SpinnerDateModel spinnerDateModel = new SpinnerDateModel(new Date(), null, null, Calendar.HOUR_OF_DAY);
+    // Create a JSpinner with the SpinnerDateModel
+    JSpinner timeSpinner = new JSpinner(spinnerDateModel);
+
+    JSpinner.DateEditor timeEditor = new JSpinner.DateEditor(timeSpinner, "HH:mm");
+
+
     JButton updateButton;
     JButton cancelButton;
 
     // private final JComboBox<String> eventTypeComboBox;
 
+    private void populateUpdateDialog() {
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+
+        Event event = updateEventViewModel.getState().getEvent();
+        eventNameInputField.setText(event.getName());
+        courseInputField.setText(event.getCourse().getCourseContact());
+        startTimeInputField.setText(event.getStartTime().format(formatter));
+        endTimeInputField.setText(event.getEndTime().format(formatter));
+        locationInputField.setText("Location");
+
+    }
     public UpdateEventView(UpdateEventViewModel updateEventViewModel, UpdateEventController updateEventController) {
         this.updateEventViewModel = updateEventViewModel;
         this.updateEventViewModel.addPropertyChangeListener(this);
+        this.updateEventController = updateEventController;
 
         JLabel title = new JLabel("Update Event");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -58,10 +85,15 @@ public class UpdateEventView extends JPanel implements ActionListener, PropertyC
                 new JLabel("Course"), courseInputField);
         LabelTextPanel startTimeInfo = new LabelTextPanel(
                 new JLabel("Start Time"), startTimeInputField);
+        //JLabel startTimePickerLabel = new JLabel("Select Time:");
+        //timeSpinner.setEditor(timeEditor);
+
         LabelTextPanel endTimeInfo = new LabelTextPanel(
                 new JLabel("End Time"), endTimeInputField);
         LabelTextPanel locationInfo = new LabelTextPanel(
                 new JLabel("Location"), locationInputField);
+
+
 
 //        eventTypeComboBox = new JComboBox<>(new String[]{"Course", "Assignment", "Reading"});
 //        LabelTextPanel eventTypeInfo = new LabelTextPanel(
@@ -73,12 +105,19 @@ public class UpdateEventView extends JPanel implements ActionListener, PropertyC
         cancelButton = new JButton(updateEventViewModel.CANCEL_BUTTON_LABEL);
         buttons.add(cancelButton);
 
-//        updateButton.addActionListener(
-//                @Override
-//                public void actionPerformed(actionEvent evt){
-//                    if (evt.getSource())
-//        }
-//        );
+        populateUpdateDialog();
+
+        updateButton.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        if (e.getSource().equals(updateButton)) {
+                            handleUpdate();
+                        } // else if (evt.getSource().equals(cancelButton)) {
+                        // handleCancel();
+                    }
+                }
+        );
         cancelButton.addActionListener(this);
 
         // eventNameInputField.addKeyListener(new KeyListener() {
@@ -109,6 +148,10 @@ public class UpdateEventView extends JPanel implements ActionListener, PropertyC
         this.add(courseInfo);
         this.add(courseErrorField);
         this.add(startTimeInfo);
+        // Add the JSpinner to the panel
+        //this.add(startTimePickerLabel);
+        //this.add(timeSpinner);
+
         this.add(startTimeErrorField);
         this.add(endTimeInfo);
         this.add(endTimeErrorField);
@@ -122,23 +165,22 @@ public class UpdateEventView extends JPanel implements ActionListener, PropertyC
         if (evt.getSource().equals(updateButton)) {
             handleUpdate();
         } // else if (evt.getSource().equals(cancelButton)) {
-            // handleCancel();
-        }
+        // handleCancel();
+    }
     //}
 
     private void handleUpdate() {
         UpdateEventState currentState = updateEventViewModel.getState();
 
-//         Determine the selected event type
-//        String selectedEventType = (String) eventTypeComboBox.getSelectedItem();
-//
-//         Create an event based on the selected type
-//        Event updatedEvent = createEventFromFields(selectedEventType);
-//
-//         Update logic using updateEventController
-//        updateEventController.execute(updatedEvent);
-//
-//         Optionally close the window or perform additional actions
+        String selectedEventType = "Assignment";//(String) eventTypeComboBox.getSelectedItem();
+        // Create an event based on the selected type
+        Event updatedEvent = createEventFromFields(selectedEventType);
+        // Update logic using updateEventController
+        updateEventController.execute(updatedEvent);
+        //
+        // Optionally close the window or perform additional actions
+        System.out.println(updatedEvent.getName());
+
     }
 
 //    private void handleCancel() {
@@ -160,6 +202,7 @@ public class UpdateEventView extends JPanel implements ActionListener, PropertyC
 
     private ClassEvent createClassEvent() {
         ClassEvent courseEvent = new ClassEvent();
+        courseEvent.setCourse(null);
         setCommonEventFields(courseEvent);
         return courseEvent;
     }
@@ -167,8 +210,8 @@ public class UpdateEventView extends JPanel implements ActionListener, PropertyC
     private AssignmentEvent createAssignmentEvent() {
         AssignmentEvent assignmentEvent = new AssignmentEvent();
         setCommonEventFields(assignmentEvent);
-         // Set specific fields for AssignmentEvent
-         // assignmentEvent.setXXX(...);
+        // Set specific fields for AssignmentEvent
+        // assignmentEvent.setXXX(...);
         return assignmentEvent;
     }
 
@@ -181,13 +224,18 @@ public class UpdateEventView extends JPanel implements ActionListener, PropertyC
     }
 
     private void setCommonEventFields(Event event) {
-//        event.setEventName(eventNameInputField.getText());
+        event.setName(eventNameInputField.getText());
+        event.setCompleted(false);
+        event.setStartTime(LocalDateTime.now());
+        event.setEndTime(LocalDateTime.now());
+        event.setLocation(null);
+
 //         Set other common fields...
     }
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         UpdateEventState state = (UpdateEventState) evt.getNewValue();
-         //Update the view based on the state, e.g., display error messages
+        //Update the view based on the state, e.g., display error messages
     }
 }

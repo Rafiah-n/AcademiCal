@@ -83,7 +83,7 @@ public class UpdateEventState {
         return event;
     }
 
-    public Event seetEvent(Event event){
+    public Event setEvent(Event event){
         return this.event = event;
     }
 
