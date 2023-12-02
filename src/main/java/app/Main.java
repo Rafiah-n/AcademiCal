@@ -2,12 +2,12 @@ package main.java.app;
 
 import main.java.data_access.FileUserDataAccessObject;
 import main.java.entity.CommonUserFactory;
-import interface_adapters.ViewManagerModel;
-import interface_adapters.logged_in.LoggedInViewModel;
-import interface_adapters.login.LoginViewModel;
-import view.LoggedInView;
-import view.LoginView;
-import view.ViewManager;
+import main.java.interface_adapters.ViewManagerModel;
+import main.java.interface_adapters.logged_in.LoggedInViewModel;
+import main.java.interface_adapters.login.LoginViewModel;
+import main.java.view.LoggedInView;
+import main.java.view.LoginView;
+import main.java.view.ViewManager;
 
 import javax.swing.*;
 import java.awt.*;

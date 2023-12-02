@@ -1,10 +1,10 @@
 package main.java.interface_adapters.login;
 
-import interface_adapters.ViewManagerModel;
+import main.java.interface_adapters.ViewManagerModel;
 import main.java.interface_adapters.logged_in.LoggedInState;
 import main.java.interface_adapters.logged_in.LoggedInViewModel;
-import use_case.login.LoginOutputBoundary;
-import use_case.login.LoginOutputData;
+import main.java.use_case.login.LoginOutputBoundary;
+import main.java.use_case.login.LoginOutputData;
 
 public class LoginPresenter implements LoginOutputBoundary {
 

@@ -9,10 +9,10 @@ import java.util.List;
 public class createEventInteractor implements createEventInputBoundary {
 
     private List<Event> events = new ArrayList<Event>();
-    private createEventInputData createEventInputData;
+    private createEventInputData eventInputData;
 
     public createEventInteractor(createEventInputData createEventInputData) {
-        this.createEventInputData = createEventInputData;
+        this.eventInputData = createEventInputData;
     }
 
     @Override

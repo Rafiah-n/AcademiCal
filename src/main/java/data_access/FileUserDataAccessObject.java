@@ -2,7 +2,7 @@ package main.java.data_access;
 
 import main.java.entity.User;
 import main.java.entity.UserFactory;
-import use_case.login.LoginUserDataAccessInterface;
+import main.java.use_case.login.LoginUserDataAccessInterface;
 
 import java.io.*;
 import java.time.LocalDateTime;

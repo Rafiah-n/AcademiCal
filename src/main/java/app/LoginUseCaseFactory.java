@@ -2,16 +2,16 @@ package main.java.app;
 
 import main.java.entity.CommonUserFactory;
 import main.java.entity.UserFactory;
-import interface_adapters.ViewManagerModel;
-import interface_adapters.logged_in.LoggedInViewModel;
-import interface_adapters.login.LoginController;
-import interface_adapters.login.LoginPresenter;
-import interface_adapters.login.LoginViewModel;
-import use_case.login.LoginInputBoundary;
-import use_case.login.LoginInteractor;
-import use_case.login.LoginOutputBoundary;
-import use_case.login.LoginUserDataAccessInterface;
-import view.LoginView;
+import main.java.interface_adapters.ViewManagerModel;
+import main.java.interface_adapters.logged_in.LoggedInViewModel;
+import main.java.interface_adapters.login.LoginController;
+import main.java.interface_adapters.login.LoginPresenter;
+import main.java.interface_adapters.login.LoginViewModel;
+import main.java.use_case.login.LoginInputBoundary;
+import main.java.use_case.login.LoginInteractor;
+import main.java.use_case.login.LoginOutputBoundary;
+import main.java.use_case.login.LoginUserDataAccessInterface;
+import main.java.view.LoginView;
 
 import javax.swing.*;
 import java.io.IOException;
