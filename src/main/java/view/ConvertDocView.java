@@ -49,7 +49,12 @@ public class ConvertDocView extends JPanel implements ActionListener, PropertyCh
                     public void actionPerformed(ActionEvent evt) {
                         if (evt.getSource().equals(convert)) {
                             ConvertDocState currentState = convertDocViewModel.getState();
-                            convertDocController.execute(currentState.getFilename());
+                            if (currentState.getFilename() == null || currentState.getFilename().isEmpty()) {
+                                showPopup("Problem has occurred:\n Filepath cannot be null or empty." );
+                            }
+                            else {
+                                convertDocController.execute(currentState.getFilename());
+                            }
                         }
                     }
                 }
