@@ -1,8 +1,8 @@
-package main.java.view;
+package view;
 
-import main.java.interface_adapters.login.LoginController;
-import main.java.interface_adapters.login.LoginViewModel;
-import main.java.interface_adapters.login.LoginState;
+import interface_adapters.login.LoginController;
+import interface_adapters.login.LoginViewModel;
+import interface_adapters.login.LoginState;
 
 import javax.swing.*;
 import java.awt.*;

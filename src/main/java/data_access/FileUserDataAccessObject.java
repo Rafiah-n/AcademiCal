@@ -1,8 +1,8 @@
-package main.java.data_access;
+package data_access;
 
-import main.java.entity.User;
-import main.java.entity.UserFactory;
-import main.java.use_case.login.LoginUserDataAccessInterface;
+import entity.User;
+import entity.UserFactory;
+import use_case.login.LoginUserDataAccessInterface;
 
 import java.io.*;
 import java.time.LocalDateTime;

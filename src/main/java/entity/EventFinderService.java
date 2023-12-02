@@ -1,4 +1,4 @@
-package main.java.entity;
+package entity;
 
 import com.hankcs.hanlp.restful.HanLPClient;
 

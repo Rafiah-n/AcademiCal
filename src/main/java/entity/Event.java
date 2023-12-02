@@ -1,4 +1,4 @@
-package main.java.entity;
+package entity;
 
 import java.time.*;
 import java.util.Optional;
@@ -21,6 +21,8 @@ public class Event {
         this.endTime = endTime;
         this.completed = completed;
     }
+
+    public Event(){}
 
     public String getName() {
         return name;

@@ -1,4 +1,4 @@
-package main.java.entity;
+package entity;
 
 public class PasswordValidatorService implements PasswordValidator{
     @Override
