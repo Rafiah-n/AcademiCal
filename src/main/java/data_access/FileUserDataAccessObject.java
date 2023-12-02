@@ -189,7 +189,9 @@ public class FileUserDataAccessObject implements LoginUserDataAccessInterface{
                 LocalDateTime localStart = LocalDateTime.ofInstant(instStart, ZoneId.systemDefault());
                 LocalDateTime localEnd = LocalDateTime.ofInstant(instEnd, ZoneId.systemDefault());
                 String location = event.getLocation();
-                entity.Event saveEvent = createEvent.create(event.getSummary(), localStart, localEnd, location, false);
+                String eventId = event.getId();
+                entity.Event saveEvent = createEvent.create(event.getSummary(), localStart, localEnd, location,
+                        false, eventId);
                 this.userEvents.add(saveEvent);
             }
         }

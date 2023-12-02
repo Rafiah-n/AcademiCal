@@ -15,6 +15,14 @@ public class LoginViewModel extends ViewModel {
 
     public LoginViewModel(){super("log in");}
 
+    /**
+     * Sets the state for the current instance of the login view model.
+     * This method updates the internal state of the login view model with the provided {@code LoginState}.
+     * The state typically contains information about the current state of the login view, such as error messages,
+     * validation flags, or other relevant properties.
+     *
+     * @param state The new {@code LoginState} to be set for the login view model.
+     */
     public void setState(LoginState state){this.state = state;}
 
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
@@ -25,5 +33,14 @@ public class LoginViewModel extends ViewModel {
         support.addPropertyChangeListener(listener);
     }
 
+    /**
+     * Retrieves the current state of the login functionality.
+     *
+     * This method returns the current {@code LoginState} associated with the login functionality.
+     * The {@code LoginState} object encapsulates information about the current state of the login component,
+     * including any error messages or relevant data.
+     *
+     * @return The current {@code LoginState} representing the state of the login functionality.
+     */
     public LoginState getState(){return state;}
 }

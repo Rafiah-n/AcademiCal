@@ -7,9 +7,11 @@ public class CommonEventFactory implements EventFactory{
 
     @Override
     public Event create(String name, LocalDateTime startTime, LocalDateTime endTime, String location,
-                        boolean completed) {
+                        boolean completed, String eventId) {
         Location location1 = new Location();
         location1.setAddress(location);
-        return new Event(name, course, startTime, endTime, location1, completed);
+        Event event = new Event(name, course, startTime, endTime, location1, completed);
+        event.setEventId(eventId);
+        return event;
     }
 }
