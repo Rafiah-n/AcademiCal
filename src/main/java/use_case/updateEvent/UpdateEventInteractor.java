@@ -12,9 +12,28 @@ public class UpdateEventInteractor implements UpdateEventInputBoundary {
         this.updateEventPresenter = updateEventOutputBoundary;
     }
 
+
+
     @Override
     public void execute(UpdateEventInputData updateEventInputData) {
-        String email = updateEventInputData.getEvent().getName();
+        Event event = updateEventInputData.getEvent();
+        System.out.println("in execute: " + event.getName());
+        boolean isValid = validate(updateEventInputData.getEvent());
+
+        if(!isValid) {
+            updateEventPresenter.prepareFailView("Validation Failed Check your input");
+        }
+
+        //update event with google api
+        updateEventDataAccessObject.update(event);
+
+        UpdateEventOutputData updateEventOutputData = new UpdateEventOutputData(event, false);
+        updateEventPresenter.prepareSuccessView(updateEventOutputData);
+    }
+
+    private boolean validate(Event event) {
+
+         /* String email = updateEventInputData.getEvent().getName();
         String password = updateEventInputData.getEvent().getName();
         if (!updateEventDataAccessObject.get(1L).getCompleted()) { //existsByEmail(email)
             updateEventPresenter.prepareFailView("Incorrect email or password.");
@@ -29,5 +48,7 @@ public class UpdateEventInteractor implements UpdateEventInputBoundary {
                 updateEventPresenter.prepareSuccessView(updateEventOutputData);
             }
         }
+        */
+        return true;
     }
 }
