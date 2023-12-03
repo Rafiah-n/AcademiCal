@@ -54,6 +54,8 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
         buttons.add(delete);
 
         logOut.addActionListener(this);
+        delete.addActionListener(this::deleteActionPerformed);
+        create.addActionListener(this::createActionPerformed);
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
@@ -69,6 +71,14 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
      */
     public void actionPerformed(ActionEvent evt) {
         System.out.println("Click " + evt.getActionCommand());
+    }
+
+    public void createActionPerformed(ActionEvent e) {
+
+    }
+
+    public void deleteActionPerformed(ActionEvent e) {
+
     }
 
     @Override
