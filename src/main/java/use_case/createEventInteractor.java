@@ -11,6 +11,8 @@ public class createEventInteractor implements createEventInputBoundary {
 
     final private CommonEventFactory eventFactory;
     final private createEventInputData eventInputData;
+    private Calendar service = new Calendar.Builder(httpTransport, jsonFactory, credentials)
+            .setApplicationName("applicationName").build();
 
     public createEventInteractor(createEventInputData createEventInputData, CommonEventFactory eventFactory) {
         this.eventInputData = createEventInputData;
@@ -20,8 +22,6 @@ public class createEventInteractor implements createEventInputBoundary {
     @Override
     public void execute(createEventInputData createInputData) {
         Event evt = eventFactory.create(createInputData.getEvent());
-        Calendar service = new Calendar.Builder(httpTransport, jsonFactory, credentials)
-                .setApplicationName("applicationName").build();
         Event event = evt
                 .setSummary("Google I/O 2015")
                 .setLocation(evt.getLocation())
@@ -40,5 +40,9 @@ public class createEventInteractor implements createEventInputBoundary {
         String calendarId = "primary";
         event = service.events().insert(calendarId, event).execute();
         System.out.printf("Event created: %s\n", event.getHtmlLink());
+    }
+
+    public void delete(Event event){
+        service.events().delete("primary", event.getId()).execute();
     }
 }
