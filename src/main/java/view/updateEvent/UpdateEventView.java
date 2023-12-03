@@ -213,6 +213,8 @@ public class UpdateEventView extends JPanel implements ActionListener, PropertyC
 
     private Event createEventFromFields(String eventType) {
         switch (eventType) {
+            case "study":
+                return createStudyEvent();
             case "course":
                 return createClassEvent();
             case "assignment":
@@ -222,6 +224,13 @@ public class UpdateEventView extends JPanel implements ActionListener, PropertyC
             default:
                 throw new IllegalArgumentException("Unknown event type: " + eventType);
         }
+    }
+
+    private StudyEvent createStudyEvent() {
+        StudyEvent studyEvent = new StudyEvent();
+        setCommonEventFields(studyEvent);
+        studyEvent.addTodo(todoErrorField.getText());
+        return studyEvent;
     }
 
     private ClassEvent createClassEvent() {
