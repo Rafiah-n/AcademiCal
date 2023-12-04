@@ -121,4 +121,30 @@ public class EventTest {
         assert(classEvent.getType().equals("MAT223"));
     }
 
+    @org.junit.Test
+    public void assignmentEvent() {
+        String type = "CSC207";
+        int percent = 3;
+        LocalDateTime lateduedate = LocalDateTime.now().plusHours(2);
+
+        AssignmentEvent assignmentEvent = new AssignmentEvent(name, course, startTime, endTime, location,
+                false, type, percent, true, lateduedate);
+
+        assert(assignmentEvent.getType().equals(type));
+        assert(assignmentEvent.getPercentage() == percent);
+        assertTrue(assignmentEvent.isRequired());
+        assert(assignmentEvent.getLateDueDate().equals(lateduedate));
+
+        LocalDateTime newdate = LocalDateTime.now().plusHours(3);
+        assignmentEvent.setType("MAT223");
+        assignmentEvent.setRequired(false);
+        assignmentEvent.setPercentage(4);
+        assignmentEvent.setLateDueDate(newdate);
+
+        assert(assignmentEvent.getType().equals("MAT223"));
+        assertFalse(assignmentEvent.isRequired());
+        assert(assignmentEvent.getPercentage() == 4);
+        assert(assignmentEvent.getLateDueDate().equals(newdate));
+    }
+
 }
