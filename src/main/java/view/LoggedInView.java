@@ -104,7 +104,7 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
 
     public void updateActionPerformed(ActionEvent e){
         String eventId = idInputField.getText();
-        String event = Objects.requireNonNull(cb.getSelectedItem()).toString();
+        Object event = Objects.requireNonNull(cb.getSelectedItem());
 
 
         System.out.println("update");
@@ -122,7 +122,7 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
 //                LocalDateTime.now(),location, false, "Reading", 15, true,
 //                LocalDateTime.now());
 
-        updateEventViewModel.getState().setEvent((Event) Objects.requireNonNull(cb.getSelectedItem()));
+        updateEventViewModel.getState().setEvent((Event) Objects.requireNonNull(event));
         UpdateEventView updateEventView = UpdateEventUseCaseFactory.create(viewManagerModel, updateEventViewModel, updateEventDataAccessObject,(Event) Objects.requireNonNull(cb.getSelectedItem()));
 
     }
