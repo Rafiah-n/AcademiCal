@@ -318,5 +318,12 @@ public class UpdateEventView extends JPanel implements ActionListener, PropertyC
         updateButton.setVisible(isAssignment || isClass || isReading || isStudy);
         cancelButton.setVisible(isAssignment || isClass || isReading || isStudy);
     }
+
+    public void showPopup(String Message){
+        JPanel popuppanel = new JPanel();
+        popuppanel.add(new JLabel(Message));
+
+        JOptionPane.showMessageDialog(this, popuppanel, "Important!", JOptionPane.PLAIN_MESSAGE);
+    }
 }
 

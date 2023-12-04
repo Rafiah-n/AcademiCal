@@ -1,13 +1,17 @@
 package interface_adapters.updateEvent;
 
 import interface_adapters.ViewManagerModel;
+import interface_adapters.ViewModel;
+import interface_adapters.logged_in.LoggedInViewModel;
 import use_case.updateEvent.UpdateEventOutputBoundary;
 import use_case.updateEvent.UpdateEventOutputData;
+import view.updateEvent.UpdateEventView;
 
 public class UpdateEventPresenter implements UpdateEventOutputBoundary {
 
     private final UpdateEventViewModel updateEventViewModel;
     private ViewManagerModel viewManagerModel;
+    private UpdateEventController updateEventController;
 
     public UpdateEventPresenter(ViewManagerModel viewManagerModel,
                                 UpdateEventViewModel updateEventViewModel) {
@@ -16,18 +20,26 @@ public class UpdateEventPresenter implements UpdateEventOutputBoundary {
     }
 
     public void prepareSuccessView(UpdateEventOutputData response) {
-        //LoggedInState loggedInState = loggedInViewModel.getState();
-       // loggedInState.setEmail(response.getEmail());
-        // this.loggedInViewModel.setState(loggedInState);
-        //this.loggedInViewModel.firePropertyChanged();
+        UpdateEventViewModel updateEventViewModel = new UpdateEventViewModel();
+        UpdateEventState updateEventState = updateEventViewModel.getState();
+        updateEventState.setEvent(response.getEvent());
+        this.updateEventViewModel.setState(updateEventState);
+        this.updateEventViewModel.firePropertyChanged();
+        UpdateEventView updateEventView = new UpdateEventView(updateEventViewModel, updateEventController);
+        updateEventView.showPopup("Event successfully updated: " + response);
 
-       // this.viewManagerModel.setActiveView(loggedInViewModel.getViewName());
+        LoggedInViewModel loggedInViewModel = new LoggedInViewModel();
+        this.viewManagerModel.setActiveView(loggedInViewModel.getViewName());
         this.viewManagerModel.firePropertyChanged();
+
     }
 
     public void prepareFailView(String error) {
         UpdateEventState updateEventState = updateEventViewModel.getState();
         updateEventState.setErrorMessage(error);
         updateEventViewModel.firePropertyChanged();
+        UpdateEventView updateEventView = new UpdateEventView(updateEventViewModel, updateEventController);
+        updateEventView.showPopup("Event successfully updated: " + error);
+
     }
 }
