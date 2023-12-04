@@ -12,65 +12,20 @@ public class CreateEventState {
 
     private Event event;
     private String eventName = "";
-
-    private String eventNameError = null;
-
     private Course course;
-
-    private Course courseError = null;
-
     private boolean eventCompleted;
-
-    private Boolean eventCompletedError = null;
-
     private String assignmentType = "";
-
-    private String assignmentTypeError = null;
-
     private int assignmentPercentage;
-
-    private int assignmentPercentageError;
-
     private boolean assignmentRequired;
-
-    private boolean assignmentRequiredError;
-
     private Resource resource;
-
-    private Resource resourceError = null;
-
     private LocalDateTime startTime;
-
-    private LocalDateTime startTimeError = null;
-
     private LocalDateTime endTime;
-
-    private LocalDateTime endTimeError = null;
-
-    private LocalDateTime lateDueDate;
-
-    private LocalDateTime lateDueDateError = null;
-
+    private LocalDateTime lateDueDate;;
     private Location location;
-
-    private Location locationError = null;
-
     private List<Double> percentageReduction;
-
-    private List<Double> percentageReductionError = null;
-
     private String classType;
-
-    private String classTypeError = null;
-
     private List<Integer> readingPages;
-
-    private List<Integer> readingPagesError = null;
-
     private List<String> studyTodo;
-
-    private List<String> studyTodoError = null;
-
     private String errorMessage = "Error occured";
 
     public CreateEventState(CreateEventState state) {
@@ -93,5 +48,65 @@ public class CreateEventState {
 
     public void setErrorMessage(String errorMessage){
         this.errorMessage=errorMessage;
+    }
+
+    public void setEventName(String name){
+        eventName = name;
+    }
+
+    public void setCourse(Course course){
+        this.course = course;
+    }
+
+    public void setEventCompleted(boolean bool){
+        eventCompleted = bool;
+    }
+
+    public void setLocation(Location location){
+        this.location = location;
+    }
+
+    public void setAssignmentType(String type){
+        assignmentType = type;
+    }
+
+    public void setAssignmentPercentage(int perc){
+        assignmentPercentage = perc;
+    }
+
+    public void setResource(Resource resource){
+        this.resource = resource;
+    }
+
+    public void setAssignmentRequired(boolean req){
+        assignmentRequired = req;
+    }
+
+    public void setStartTime(LocalDateTime time){
+        startTime = time;
+    }
+
+    public void setEndTime(LocalDateTime time){
+        endTime = time;
+    }
+
+    public void setLateDueDate(LocalDateTime time){
+        lateDueDate = time;
+    }
+
+    public void setPercentageReduction(List<Double> list){
+        percentageReduction = list;
+    }
+
+    public void setClassType(String type){
+        classType = type;
+    }
+
+    public void setReadingPages(List<Integer> pages){
+        readingPages = pages;
+    }
+
+    public void setStudyTodo(List<String> todo){
+        studyTodo = todo;
     }
 }
