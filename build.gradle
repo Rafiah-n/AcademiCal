@@ -12,12 +12,17 @@ plugins{
 repositories {
     mavenCentral()
 }
+sourceSets {
+    test{
+        java{
+            srcDirs = ['src/test/java']
+        }
+    }
+}
 
 dependencies {
     implementation 'com.hankcs.hanlp.restful:hanlp-restful:0.0.15'
     implementation 'org.apache.pdfbox:pdfbox:3.0.0'
     testImplementation 'junit:junit:4.13.1'
-    testImplementation 'junit:junit:4.13.1'
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.8.1'
     testImplementation 'org.testng:testng:7.1.0'
 }
