@@ -5,7 +5,7 @@ import entity.Event;
 import interface_adapters.updateEvent.UpdateEventController;
 import interface_adapters.updateEvent.UpdateEventState;
 import interface_adapters.updateEvent.UpdateEventViewModel;
-import view.LabelTextPanel;
+// import view.LabelTextPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -87,7 +87,7 @@ public class UpdateEventView extends JPanel implements ActionListener, PropertyC
         JLabel title = new JLabel("Update Event");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-
+        /*
         LabelTextPanel eventNameInfo = new LabelTextPanel(
                 new JLabel("Event Name"), eventNameInputField);
         LabelTextPanel courseInfo = new LabelTextPanel(
@@ -108,7 +108,7 @@ public class UpdateEventView extends JPanel implements ActionListener, PropertyC
                 new JLabel("Percentage"), percentageInputField);
         LabelTextPanel todoInfo = new LabelTextPanel(
                 new JLabel("To-do"), todoInputField);
-
+        */
 
         JPanel buttons = new JPanel();
         updateButton = new JButton(updateEventViewModel.UPDATE_BUTTON_LABEL);
@@ -160,6 +160,7 @@ public class UpdateEventView extends JPanel implements ActionListener, PropertyC
 
         this.add(title);
         // this.add(eventTypeInfo);
+        /*
         this.add(eventNameInfo);
         this.add(eventNameErrorField);
         this.add(courseInfo);
@@ -182,6 +183,7 @@ public class UpdateEventView extends JPanel implements ActionListener, PropertyC
         this.add(todoErrorField);
         this.add(percentageInfo);
         this.add(percantageErrorField);
+         */
 
         this.add(buttons);
     }
