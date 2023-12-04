@@ -21,16 +21,6 @@ import java.util.Arrays;
 public class LoggedInView extends JPanel implements ActionListener, PropertyChangeListener {
 
     public final String viewName = "logged in";
-    final JTextField nameInputField = new JTextField(20);
-    final JTextField courseInputField = new JTextField(20);
-    final JTextField startTimeInputField = new JTextField(20);
-    final JTextField endTimeInputField = new JTextField(20);
-    final JTextField locationInputField = new JTextField(20);
-    final JTextField completedInputField = new JTextField(20);
-    final JTextField typeInputField = new JTextField(20);
-    final JTextField percentageInputField = new JTextField(20);
-    final JTextField reqInputField = new JTextField(20);
-    final JTextField lateDueDateInputField = new JTextField(20);
     final JTextField idInputField = new JTextField();
     private final LoggedInViewModel loggedInViewModel;
 
@@ -109,43 +99,6 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
     }
 
     public void createActionPerformed(ActionEvent e) {
-        nameInputField.addKeyListener(new KeyListener() {
-            @Override
-            public void keyTyped(KeyEvent e) {
-                LoggedInState currentState = loggedInViewModel.getState();
-                currentState.setEmail(nameInputField.getText() + e.getKeyChar());
-                loggedInViewModel.setState(currentState);
-            }
-
-            @Override
-            public void keyPressed(KeyEvent e) {
-
-            }
-
-            @Override
-            public void keyReleased(KeyEvent e) {
-
-            }
-        });
-
-        courseInputField.addKeyListener(new KeyListener() {
-            @Override
-            public void keyTyped(KeyEvent e) {
-                LoggedInState currentState = loggedInViewModel.getState();
-                currentState.setEmail(courseInputField.getText() + e.getKeyChar());
-                loggedInViewModel.setState(currentState);
-            }
-
-            @Override
-            public void keyPressed(KeyEvent e) {
-
-            }
-
-            @Override
-            public void keyReleased(KeyEvent e) {
-
-            }
-        });
 
     }
 
