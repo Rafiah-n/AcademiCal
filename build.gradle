@@ -5,8 +5,10 @@
  * To learn more about Gradle by exploring our Samples at https://docs.gradle.org/8.3/samples
  */
 
-apply plugin: 'java'
-apply plugin: 'idea'
+plugins{
+    id 'java'
+    id 'application'
+}
 
 repositories {
     mavenCentral()
@@ -14,6 +16,7 @@ repositories {
 
 dependencies {
     implementation 'com.hankcs.hanlp.restful:hanlp-restful:0.0.15'
+    implementation 'org.apache.pdfbox:pdfbox:3.0.0'
     testImplementation 'org.junit.jupiter:junit-jupiter:5.8.1'
 }
 
