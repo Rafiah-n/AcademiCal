@@ -13,6 +13,10 @@ public class StudyEvent extends Event{
         this.todo = todo;
     }
 
+    public StudyEvent() {
+
+    }
+
 
     public List<String> getTodo() {
         return todo;
