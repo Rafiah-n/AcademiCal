@@ -1,13 +1,18 @@
 package view;
 
+import interface_adapters.CreateEventState;
+import interface_adapters.CreateEventViewModel;
 import interface_adapters.logged_in.LoggedInState;
 import interface_adapters.logged_in.LoggedInViewModel;
 import data_access.FileUserDataAccessObject;
+import interface_adapters.login.LoginState;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
@@ -16,6 +21,17 @@ import java.util.Arrays;
 public class LoggedInView extends JPanel implements ActionListener, PropertyChangeListener {
 
     public final String viewName = "logged in";
+    final JTextField nameInputField = new JTextField(20);
+    final JTextField courseInputField = new JTextField(20);
+    final JTextField startTimeInputField = new JTextField(20);
+    final JTextField endTimeInputField = new JTextField(20);
+    final JTextField locationInputField = new JTextField(20);
+    final JTextField completedInputField = new JTextField(20);
+    final JTextField typeInputField = new JTextField(20);
+    final JTextField percentageInputField = new JTextField(20);
+    final JTextField reqInputField = new JTextField(20);
+    final JTextField lateDueDateInputField = new JTextField(20);
+    final JTextField idInputField = new JTextField();
     private final LoggedInViewModel loggedInViewModel;
 
     JComboBox<String> cb;
@@ -64,6 +80,25 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
         this.add(text);
         this.add(cb);
         this.add(buttons);
+
+        idInputField.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                LoggedInState currentState = loggedInViewModel.getState();
+                currentState.setEmail(idInputField.getText() + e.getKeyChar());
+                loggedInViewModel.setState(currentState);
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+
+            }
+        });
     }
 
     /**
@@ -74,6 +109,43 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
     }
 
     public void createActionPerformed(ActionEvent e) {
+        nameInputField.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                LoggedInState currentState = loggedInViewModel.getState();
+                currentState.setEmail(nameInputField.getText() + e.getKeyChar());
+                loggedInViewModel.setState(currentState);
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+
+            }
+        });
+
+        courseInputField.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                LoggedInState currentState = loggedInViewModel.getState();
+                currentState.setEmail(courseInputField.getText() + e.getKeyChar());
+                loggedInViewModel.setState(currentState);
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+
+            }
+        });
 
     }
 
