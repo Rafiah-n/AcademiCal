@@ -6,6 +6,7 @@ import interface_adapters.logged_in.LoggedInState;
 import interface_adapters.logged_in.LoggedInViewModel;
 import data_access.FileUserDataAccessObject;
 import interface_adapters.login.LoginState;
+import use_case.DeleteEvent;
 
 import javax.swing.*;
 import java.awt.*;
@@ -99,6 +100,9 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
     }
 
     public void createActionPerformed(ActionEvent e) {
+        CreateEventViewModel createView = new CreateEventViewModel();
+
+        CreateEventView createdView = new CreateEventView(createView);
 
     }
 
