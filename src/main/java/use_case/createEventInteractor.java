@@ -21,7 +21,7 @@ public class createEventInteractor implements createEventInputBoundary {
 
     @Override
     public void execute(createEventInputData createInputData) {
-        Event evt = eventFactory.create(createInputData.getEvent());
+        Event evt = createInputData.getEvent();
         Event event = evt
                 .setSummary("Google I/O 2015")
                 .setLocation(evt.getLocation())
