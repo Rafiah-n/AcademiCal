@@ -32,6 +32,23 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * The UpdateEventDataAccessObject class implements the UpdateEventDataAccessInterface
+ * and is responsible for updating events in the Google Calendar API.
+ * It utilizes the Google Calendar API to perform update operations on events.
+ * Requires appropriate credentials and token setup to access the Google Calendar API.
+ * It uses the user's primary calendar for the update operation.
+ * Assumes the existence of a "credentials.json" file in the classpath.
+ * Also, requires a "tokens" directory to store user authorization tokens.
+ * Reference: https://developers.google.com/calendar/quickstart
+ * Note: Error handling in this code is minimal and should be enhanced for production use.
+ *
+ * @author Kubra Saykili
+ * @version 1.0
+ * @since Dec 1, 2023
+ *
+ */
+
 public class UpdateEventDataAccessObject implements UpdateEventDataAccessInterface {
     private static final String APPLICATION_NAME = "Google Calendar API Java Quickstart";
     private final ArrayList<Event> userEvents = new ArrayList<>();
@@ -45,6 +62,15 @@ public class UpdateEventDataAccessObject implements UpdateEventDataAccessInterfa
     public void save(entity.Event event) {
     }
 
+
+    /**
+     * Updates the specified event in the Google Calendar API.
+     * It sets up the Google Calendar API service, converts LocalDateTime to the required format,
+     * and creates a Google Calendar event to perform the update.
+     *
+     * @param updatedEvent The updated event to be updated in the Google Calendar API.
+     * @throws RuntimeException if an IO or GeneralSecurityException occurs during the update process.
+     */
     @Override
     public void update(Event updatedEvent) {
 
@@ -107,6 +133,14 @@ public class UpdateEventDataAccessObject implements UpdateEventDataAccessInterfa
         }
     }
 
+    /**
+     * Retrieves an event based on the specified ID from the Google Calendar API.
+     * Note: Retrieving events is not implemented in this example.
+     * You may implement it based on your use case requirements.
+     *
+     * @param id The ID of the event to be retrieved.
+     * @return null since retrieving events is not implemented in this example.
+     */
     @Override
     public Event get(Long id) {
         return null;

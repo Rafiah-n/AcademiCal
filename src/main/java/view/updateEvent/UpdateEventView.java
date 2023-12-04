@@ -72,6 +72,13 @@ public class UpdateEventView extends JPanel implements ActionListener, PropertyC
 
     // private final JComboBox<String> eventTypeComboBox;
 
+    /**
+     * Constructs an UpdateEventView with the specified view model and controller.
+     *
+     * @param updateEventViewModel The view model for handling the state of the update event view.
+     * @param updateEventController The controller for updating events based on user input.
+     */
+
     public UpdateEventView(UpdateEventViewModel updateEventViewModel, UpdateEventController updateEventController)
     {   this.updateEventController = updateEventController;
         this.updateEventViewModel = updateEventViewModel;
@@ -113,6 +120,12 @@ public class UpdateEventView extends JPanel implements ActionListener, PropertyC
         // showHideFieldsBasedOnEventType(eventType);
         updateButton.addActionListener(
                 new ActionListener() {
+                    /**
+                     * Handles the actionPerformed event for buttons in the view.
+                     * Calls the appropriate method based on the event source.
+                     *
+                     * @param e The ActionEvent representing the button click.
+                     */
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(updateButton)) {
@@ -173,6 +186,12 @@ public class UpdateEventView extends JPanel implements ActionListener, PropertyC
         this.add(buttons);
     }
 
+    /**
+     * Handles the actionPerformed event for buttons in the view.
+     * Calls the appropriate method based on the event source.
+     *
+     * @param evt The ActionEvent representing the button click.
+     */
     public void actionPerformed(ActionEvent evt) {
         if (evt.getSource().equals(updateButton)) {
             handleUpdate();
@@ -180,6 +199,14 @@ public class UpdateEventView extends JPanel implements ActionListener, PropertyC
             // handleCancel();
         }
     //}
+
+    /**
+     * Creates an event based on the selected event type and fills its details from input fields.
+     *
+     * @param 'eventType' The type of event to create (e.g., "study", "assignment").
+     * @return An instance of the corresponding event type.
+     * @throws IllegalArgumentException if the provided event type is unknown.
+     */
     private String getEventType(String eventName) {
         return eventName.substring(0,eventName.indexOf(":")).toLowerCase();
     }
@@ -273,6 +300,11 @@ public class UpdateEventView extends JPanel implements ActionListener, PropertyC
         event.setLocation(newlocation);
     }
 
+    /**
+     * Updates the view based on property changes in the associated view model.
+     *
+     * @param evt The PropertyChangeEvent representing a change in the view model's state.
+     */
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         UpdateEventState state = (UpdateEventState) evt.getNewValue();
@@ -319,6 +351,11 @@ public class UpdateEventView extends JPanel implements ActionListener, PropertyC
         cancelButton.setVisible(isAssignment || isClass || isReading || isStudy);
     }
 
+    /**
+     * A panel that shows up when update is made
+     *
+     * @param Message  the message that will showon the panel
+     */
     public void showPopup(String Message){
         JPanel popuppanel = new JPanel();
         popuppanel.add(new JLabel(Message));

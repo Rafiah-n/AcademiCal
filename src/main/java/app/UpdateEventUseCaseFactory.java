@@ -17,9 +17,31 @@ import view.updateEvent.*;
 import javax.swing.*;
 import java.io.IOException;
 
+
+/**
+ * The UpdateEventUseCaseFactory class provides a method to create an instance of the UpdateEventView.
+ * It initializes and orchestrates the necessary components for the update event use case.
+ * It handles exceptions related to file operations and displays an error message if needed.
+ * Note: This class follows the Factory Method pattern to create an instance of the UpdateEventView.
+ * Note: Error handling in this code is minimal and should be enhanced for production use.
+ *
+ * @author Kubra Saykili
+ * @version 1.0
+ * @since Dec 1, 2023
+ */
 public class UpdateEventUseCaseFactory {
     private UpdateEventUseCaseFactory() {}
 
+
+    /**
+     * Creates and returns an instance of the UpdateEventView for the update event use case.
+     *
+     * @param viewManagerModel           The ViewManagerModel for managing views in the application.
+     * @param updateEventViewModel       The UpdateEventViewModel for managing the view's state.
+     * @param updateEventDataAccessInterface The UpdateEventDataAccessInterface for accessing event data.
+     * @param event                      The event to be updated.
+     * @return An instance of the UpdateEventView.
+     */
     public static UpdateEventView create(
             ViewManagerModel viewManagerModel,
             UpdateEventViewModel updateEventViewModel,

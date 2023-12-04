@@ -5,6 +5,16 @@ import interface_adapters.ViewModel;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
+/**
+ * The UpdateEventViewModel class represents the ViewModel for the UpdateEventView.
+ * It contains labels for UI elements and maintains the state of the UpdateEventView.
+ * This class is used to update the UI and communicate with the Presenter.
+ *
+ * @author Kubra Saykili
+ * @version 1.0
+ * @since Dec 1, 2023
+ */
+
 public class UpdateEventViewModel extends ViewModel {
     public final String TITLE_LABEL = "Update Event View";
     public final String EVENT_NAME_LABEL = "Event Name";
@@ -28,10 +38,20 @@ public class UpdateEventViewModel extends ViewModel {
 
     private UpdateEventState state = new UpdateEventState();
 
+    /**
+     * Constructs an UpdateEventViewModel with the specified name.
+     *
+     * @param name The name of the ViewModel.
+     */
     public UpdateEventViewModel() {
         super("update event");
     }
 
+    /**
+     * Sets the state of the UpdateEventViewModel.
+     *
+     * @param state The state to set.
+     */
     public void setState(UpdateEventState state) {
         this.state = state;
     }
@@ -40,14 +60,29 @@ public class UpdateEventViewModel extends ViewModel {
 
     // This is what the UpdateEvent Presenter will call to let the ViewModel know
     // to alert the View
+
+    /**
+     * Notifies listeners when a property is changed.
+     */
     public void firePropertyChanged() {
         support.firePropertyChange("state", null, this.state);
     }
 
+    /**
+     * Adds a property change listener.
+     *
+     * @param listener The listener to add.
+     */
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         support.addPropertyChangeListener(listener);
     }
 
+
+    /**
+     * Gets the current state of the ViewModel.
+     *
+     * @return The current state.
+     */
     public UpdateEventState getState() {
         return state;
     }
