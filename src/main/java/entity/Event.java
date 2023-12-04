@@ -1,7 +1,8 @@
 package entity;
 
+import com.google.api.services.calendar.model.EventDateTime;
+
 import java.time.*;
-import java.util.Optional;
 
 public class Event {
     private String name;
@@ -12,6 +13,7 @@ public class Event {
     private LocalDateTime endTime;
     private Location location;
     private boolean completed;
+    private String eventId;
 
     public Event(String name, Course course, LocalDateTime startTime, LocalDateTime endTime, Location location,
                  boolean completed){
@@ -20,6 +22,7 @@ public class Event {
         this.startTime =startTime;
         this.endTime = endTime;
         this.completed = completed;
+        this.location = location;
     }
 
     public Event() {
@@ -81,6 +84,10 @@ public class Event {
     public void setCompleted(boolean compl){
         completed = compl;
     }
+
+    public String getEventId(){return eventId;}
+    public void setEventId(String eventId){this.eventId = eventId;}
+
 
     @Override
     public String toString() {
