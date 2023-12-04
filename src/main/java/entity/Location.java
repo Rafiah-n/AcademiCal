@@ -6,6 +6,15 @@ public class Location {
     private Double longitude;
     private Double latitude;
 
+    public Location(String name, String address, double lon, double lat) {
+        buildingName = name;
+        this.address = address;
+        longitude = lon;
+        latitude = lat;
+    }
+
+    public Location(){}
+
     // setters
 
     public void setBuildingName(String building) {
