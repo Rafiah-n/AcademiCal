@@ -25,3 +25,5 @@ UML - Class Diagram:
 UML - Sequence Diagram:
 
 <img width="296" alt="image" src="https://github.com/Rafiah-n/AcademiCal/assets/54577192/4c752738-1de2-4c5f-b9da-9cb44de259f6">
+
+https://docs.google.com/presentation/d/1Ho9QFaLsbaK3pVy0pBGa3nNgMLy8k0OHO_N0EVaNBcs/edit?usp=sharing 

@@ -40,7 +40,7 @@ public class OptionalTime {
     private static final Pattern twelveHourMatch = Pattern.compile(
             "(0?[1-9]|1[0-2])[:h]?([0-5]\\d)?(?:[:.m][0-5]\\d)?\\w?(am|pm)", Pattern.CASE_INSENSITIVE);
     private static final Pattern twentyFourHourMatch = Pattern.compile(
-            "([0-1]?\\d|2[0-3])[:h]?([0-5]\\d)?(?:[:.m][0-5]\\d)?", Pattern.CASE_INSENSITIVE);
+            "([0-1]?\\d|2[0-3])[:h]([0-5]\\d)(?:[:.m][0-5]\\d)?", Pattern.CASE_INSENSITIVE);
     private static final Pattern dayOfMonthMatch = Pattern.compile("([0-2]?\\d|3[0-1])(?:st|nd|rd|th)?");
     private static final Pattern monthMatch = Pattern.compile(
             "(jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|may|june?|july?|aug(?:ust)?|sep(?:tember)?|oct(?:ober)?|nov(?:ember)?|dec(?:ember)?)", Pattern.CASE_INSENSITIVE);
