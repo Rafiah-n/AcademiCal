@@ -14,9 +14,8 @@ public class createEventInteractor implements createEventInputBoundary {
     private Calendar service = new Calendar.Builder(httpTransport, jsonFactory, credentials)
             .setApplicationName("applicationName").build();
 
-    public createEventInteractor(createEventInputData createEventInputData, CommonEventFactory eventFactory) {
+    public createEventInteractor(createEventInputData createEventInputData) {
         this.eventInputData = createEventInputData;
-        this.eventFactory = eventFactory;
     }
 
     @Override
