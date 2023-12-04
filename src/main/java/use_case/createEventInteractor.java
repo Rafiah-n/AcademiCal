@@ -42,7 +42,4 @@ public class createEventInteractor implements createEventInputBoundary {
         System.out.printf("Event created: %s\n", event.getHtmlLink());
     }
 
-    public void delete(Event event){
-        service.events().delete("primary", event.getId()).execute();
-    }
 }
