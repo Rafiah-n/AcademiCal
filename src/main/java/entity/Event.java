@@ -20,6 +20,7 @@ public class Event {
         this.startTime =startTime;
         this.endTime = endTime;
         this.completed = completed;
+        this.location = location;
     }
 
     public String getName() {
