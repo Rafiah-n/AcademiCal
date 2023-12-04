@@ -9,7 +9,17 @@ public class AssignmentEvent extends Event{
     private int percentage;
     private boolean required;
     private LocalDateTime lateDueDate;
-    private ArrayList<Double> percentageReduction = new ArrayList<>();
+    //private ArrayList<Double> percentageReduction = new ArrayList<>();
+
+    public AssignmentEvent(String name, Course course, LocalDateTime startTime, LocalDateTime endTime,
+                           Location location, boolean completed, String type, int percentage, boolean required,
+                           LocalDateTime lateDueDate) {
+        super(name, course, startTime, endTime, location, completed);
+        this.type = type;
+        this.percentage = percentage;
+        this.required = required;
+        this.lateDueDate = lateDueDate;
+    }
 
 
     public String getType(){
@@ -37,7 +47,8 @@ public class AssignmentEvent extends Event{
     public void setLateDueDate(LocalDateTime time){
         lateDueDate =  time;
     }
-    public ArrayList<Double> getPercentageReduction(){
+
+    /*public ArrayList<Double> getPercentageReduction(){
         return percentageReduction;
     }
     public void setPercentageReduction(ArrayList<Double> list){
@@ -51,4 +62,6 @@ public class AssignmentEvent extends Event{
     public void removePercentage(double per){
         percentageReduction.remove(per);
     }
+
+     */
 }
