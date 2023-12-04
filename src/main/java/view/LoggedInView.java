@@ -84,9 +84,7 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
         idInputField.addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {
-                LoggedInState currentState = loggedInViewModel.getState();
-                currentState.setEmail(idInputField.getText() + e.getKeyChar());
-                loggedInViewModel.setState(currentState);
+                String id = String.valueOf(loggedInViewModel.getState());
             }
 
             @Override
@@ -99,6 +97,8 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
 
             }
         });
+
+        DeleteEvent deleteEvent = new DeleteEvent();
     }
 
     /**
@@ -154,7 +154,7 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
     }
 
     public void deleteActionPerformed(ActionEvent e) {
-
+        deleteEvent.delete(idInputField);
     }
 
     @Override
