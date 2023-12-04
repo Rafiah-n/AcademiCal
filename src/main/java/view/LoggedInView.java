@@ -149,7 +149,7 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
 
     }
 
-    public void updateActionPerformed(ActionEvent e{
+    public void updateActionPerformed(ActionEvent e){
         
     }
 

@@ -14,8 +14,16 @@ public class LoginOutputData {
         this.userEvents = userEvents;
         this.useCaseFailed = useCaseFailed;
     }
-
+    /**
+     * Retrieves the email associated with the current instance.
+     * @return A {@code String} representing the email address. It may be null if no email is set.
+     */
     public String getEmail(){return email;}
 
+    /**
+     * Retrieves the list of user events associated with the current instance.
+     * @return An {@code ArrayList<String>} representing the user events.
+     * It may be an empty list if no events are present.
+     */
     public ArrayList<String> getUserEvents(){return userEvents;}
 }

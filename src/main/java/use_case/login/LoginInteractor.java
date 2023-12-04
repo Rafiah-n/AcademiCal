@@ -17,6 +17,15 @@ public class LoginInteractor implements LoginInputBoundary{
         this.loginPresenter = loginOutputBoundary;
     }
 
+    /**
+     * Executes the login use case with the provided login input data.
+     * This method performs the login operation using the provided {@code LoginInputData} object,
+     * checking the validity of the email and password, and preparing the appropriate view through the {@code loginPresenter}.
+     * If the email does not exist or the password is incorrect, the failure view is prepared with an error message.
+     * If the login is successful, the success view is prepared with relevant user information and associated events.
+     *
+     * @param loginInputData The input data for the login operation, including the email and password.
+     */
     @Override
     public void execute(LoginInputData loginInputData) {
         String email = loginInputData.getEmail();
