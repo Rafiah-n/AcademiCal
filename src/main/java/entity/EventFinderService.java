@@ -38,9 +38,9 @@ public final class EventFinderService implements EventFinder {
      * otherwise. HANLP_AUTH_KEY can be null, but functionality will be
      * limited.
      *
-     * @param  text an absolute URL giving the base location of the image
-     * @param  span the location of the image, relative to the url argument
-     * @return      the image at the specified URL
+     * @param  text the input text to be parsed, less than 5000 characters
+     * @param  span the location of the text as a list of two integers
+     * @return      the FoundEvent object wrapping a single Event
      * @see         EventFinder
      * @see         FoundEvent
      * @see         HanLPClient
