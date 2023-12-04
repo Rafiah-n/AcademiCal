@@ -8,6 +8,7 @@ public class LoggedInState {
 
     public LoggedInState(LoggedInState copy) {
         email = copy.email;
+        userEvents = copy.userEvents;
     }
 
     // Because of the previous copy constructor, the default constructor must be explicit.
