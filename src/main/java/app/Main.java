@@ -1,6 +1,5 @@
 package app;
 
-<<<<<<< HEAD
 import entity.EventFinder;
 import entity.EventFinderService;
 import interface_adapters.ViewManagerModel;
