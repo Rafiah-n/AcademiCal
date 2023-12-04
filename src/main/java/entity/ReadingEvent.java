@@ -1,5 +1,6 @@
 package entity;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class ReadingEvent extends Event{
@@ -9,8 +10,11 @@ public class ReadingEvent extends Event{
     private ArrayList<Integer> pages = new ArrayList<>();
 
 
-    public ReadingEvent(Resource resource) {
+    public ReadingEvent(String name, Course course, LocalDateTime startTime, LocalDateTime endTime,
+                        Location location, boolean completed, Resource resource, boolean required) {
+        super(name, course, startTime, endTime, location, completed);
         this.resource = resource;
+        this.required = required;
     }
 
     public Resource getResource() {
