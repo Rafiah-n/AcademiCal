@@ -1,11 +1,12 @@
 package view;
 
-import interface_adapters.CreateEventState;
-import interface_adapters.CreateEventViewModel;
+import app.UpdateEventUseCaseFactory;
+import data_access.UpdateEventDataAccessObject;
+import interface_adapters.ViewManagerModel;
 import interface_adapters.logged_in.LoggedInState;
 import interface_adapters.logged_in.LoggedInViewModel;
-import data_access.FileUserDataAccessObject;
-import interface_adapters.login.LoginState;
+import interface_adapters.updateEvent.UpdateEventViewModel;
+import view.updateEvent.UpdateEventView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,14 +16,14 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Objects;
 
 public class LoggedInView extends JPanel implements ActionListener, PropertyChangeListener {
 
     public final String viewName = "logged in";
     final JTextField idInputField = new JTextField();
     private final LoggedInViewModel loggedInViewModel;
+//    private DeleteEvent deleteEvent;
 
     JComboBox<String> cb;
 
@@ -37,7 +38,6 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
     public LoggedInView(LoggedInViewModel loggedInViewModel) {
         this.loggedInViewModel = loggedInViewModel;
         this.loggedInViewModel.addPropertyChangeListener(this);
-
 
         JLabel title = new JLabel("Logged In Screen");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -60,7 +60,7 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
         buttons.add(delete);
 
         logOut.addActionListener(this);
-        delete.addActionListener(this::deleteActionPerformed);
+//        delete.addActionListener(this::deleteActionPerformed);
         create.addActionListener(this::createActionPerformed);
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -88,7 +88,7 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
             }
         });
 
-        DeleteEvent deleteEvent = new DeleteEvent();
+//        deleteEvent = new DeleteEvent();
     }
 
     /**
@@ -122,14 +122,14 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
 //                LocalDateTime.now(),location, false, "Reading", 15, true,
 //                LocalDateTime.now());
 
-        updateEventViewModel.getState().setEvent((Event) Objects.requireNonNull(event));
-        UpdateEventView updateEventView = UpdateEventUseCaseFactory.create(viewManagerModel, updateEventViewModel, updateEventDataAccessObject,(Event) Objects.requireNonNull(cb.getSelectedItem()));
+        updateEventViewModel.getState().setEvent((entity.Event) Objects.requireNonNull(event));
+        UpdateEventView updateEventView = UpdateEventUseCaseFactory.create(viewManagerModel, updateEventViewModel, updateEventDataAccessObject,(entity.Event) Objects.requireNonNull(cb.getSelectedItem()));
 
     }
 
-    public void deleteActionPerformed(ActionEvent e) {
-        deleteEvent.delete(idInputField);
-    }
+//    public void deleteActionPerformed(ActionEvent e) {
+//        deleteEvent.delete(idInputField);
+//    }
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {

@@ -21,6 +21,7 @@ public class Event {
         this.startTime =startTime;
         this.endTime = endTime;
         this.completed = completed;
+        this.location = location;
     }
 
     public String getName() {
@@ -78,11 +79,8 @@ public class Event {
     public void setCompleted(boolean compl){
         completed = compl;
     }
-
     public String getEventId(){return eventId;}
     public void setEventId(String eventId){this.eventId = eventId;}
-
-
     @Override
     public String toString() {
         return "Event{" +

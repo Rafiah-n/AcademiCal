@@ -40,7 +40,7 @@ public class OptionalTime {
     private static final Pattern twelveHourMatch = Pattern.compile(
             "(0?[1-9]|1[0-2])[:h]?([0-5]\\d)?(?:[:.m][0-5]\\d)?\\w?(am|pm)", Pattern.CASE_INSENSITIVE);
     private static final Pattern twentyFourHourMatch = Pattern.compile(
-            "([0-1]?\\d|2[0-3])[:h]?([0-5]\\d)?(?:[:.m][0-5]\\d)?", Pattern.CASE_INSENSITIVE);
+            "([0-1]?\\d|2[0-3])[:h]([0-5]\\d)(?:[:.m][0-5]\\d)?", Pattern.CASE_INSENSITIVE);
     private static final Pattern dayOfMonthMatch = Pattern.compile("([0-2]?\\d|3[0-1])(?:st|nd|rd|th)?");
     private static final Pattern monthMatch = Pattern.compile(
             "(jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|may|june?|july?|aug(?:ust)?|sep(?:tember)?|oct(?:ober)?|nov(?:ember)?|dec(?:ember)?)", Pattern.CASE_INSENSITIVE);
@@ -72,7 +72,7 @@ public class OptionalTime {
 
         // hour + minute
         if (twelveHourMatcher.find()) {
-            System.out.println(twelveHourMatcher.namedGroups());
+            System.out.println(twelveHourMatcher.group());
             hour = Optional.of(Integer.parseInt(twelveHourMatcher.group(1)));
             if (twelveHourMatcher.group(2) != null) {
                 System.out.println(twelveHourMatcher.group(2));
@@ -92,7 +92,7 @@ public class OptionalTime {
             if (twentyFourHourMatcher.group(2) != null) {
                 minute = Optional.of(Integer.parseInt(twentyFourHourMatcher.group(2)));
             }
-            // month
+        // month
         } else if (monthMatcher.find()) {
             Map<String, Month> monthAbbreviationMap = new HashMap<>();
             monthAbbreviationMap.put("JAN", Month.JANUARY);
@@ -109,10 +109,10 @@ public class OptionalTime {
             monthAbbreviationMap.put("DEC", Month.DECEMBER);
 
             month = Optional.of(monthAbbreviationMap.get(monthMatcher.group(1).toUpperCase().substring(0, 3)));
-            // year
+        // year
         } else if (yearMatcher.find()) {
             year = Optional.of(Integer.parseInt(yearMatcher.group(1)));
-            // dayOfMonth
+        // dayOfMonth
         } else if (dayOfMonthMatcher.find()) {
             dayOfMonth = Optional.of(Integer.parseInt(dayOfMonthMatcher.group(1)));
         }
@@ -175,5 +175,4 @@ public class OptionalTime {
 
         return ret;
     }
-
 }

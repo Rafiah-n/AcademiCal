@@ -1,7 +1,5 @@
 package use_case.login;
 
-import interface_adapters.logged_in.LoggedInState;
-
 import java.util.ArrayList;
 
 public class LoginOutputData {

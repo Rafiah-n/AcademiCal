@@ -28,7 +28,7 @@ import com.google.api.services.calendar.CalendarScopes;
 import com.google.api.services.calendar.model.Event;
 import com.google.api.services.calendar.model.Events;
 
-public class FileUserDataAccessObject implements LoginUserDataAccessInterface{
+public class FileUserDataAccessObject implements LoginUserDataAccessInterface {
     private final File csvFile;
     private final Map<String, Integer> headers = new LinkedHashMap<>();
     private final Map<String, User> accounts = new HashMap<>();
@@ -43,7 +43,7 @@ public class FileUserDataAccessObject implements LoginUserDataAccessInterface{
     private static final String CREDENTIALS_FILE_PATH = "/credentials.json";
 
     /**
-     * @param csvPath the path to the csv file.
+     * @param csvPath     the path to the csv file.
      * @param userFactory to create users and users to the accounts.
      * @throws IOException if there are problems with the file.
      */
@@ -79,6 +79,7 @@ public class FileUserDataAccessObject implements LoginUserDataAccessInterface{
 
     /**
      * Save the user to the csv file and accounts.
+     *
      * @param user which should be saved.
      */
     @Override
@@ -86,13 +87,17 @@ public class FileUserDataAccessObject implements LoginUserDataAccessInterface{
         accounts.put(user.getEmail(), user);
         this.save();
     }
+
     /**
      * Return a user based on the email.
+     *
      * @param email the email based on which a user is returned.
      * @return a user.
      */
     @Override
-    public User get(String email) {return accounts.get(email);}
+    public User get(String email) {
+        return accounts.get(email);
+    }
 
     private void save() {
         BufferedWriter writer;
@@ -117,6 +122,7 @@ public class FileUserDataAccessObject implements LoginUserDataAccessInterface{
 
     /**
      * Return whether a user exists with username identifier.
+     *
      * @param identifier the username to check.
      * @return whether a user exists with username identifier
      */
@@ -149,8 +155,9 @@ public class FileUserDataAccessObject implements LoginUserDataAccessInterface{
 
     /**
      * Returns a string with the next 10 events on user's calendar.
+     *
      * @return a ArrayList with the next 10 events on user's calendar.
-     * @throws IOException if there are problems with HTTP_TRANSPORT.
+     * @throws IOException              if there are problems with HTTP_TRANSPORT.
      * @throws GeneralSecurityException if there are problems with HTTP_TRANSPORT.
      */
     @Override

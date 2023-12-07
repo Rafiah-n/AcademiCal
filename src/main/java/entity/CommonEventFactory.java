@@ -2,7 +2,7 @@ package entity;
 
 import java.time.LocalDateTime;
 
-public class CommonEventFactory implements EventFactory{
+public class CommonEventFactory implements EventFactory {
     private Course course = new Course();
 
     @Override

@@ -16,7 +16,6 @@ public class LoginInteractor implements LoginInputBoundary{
         this.userDataAccessObject = userDataAccessInterface;
         this.loginPresenter = loginOutputBoundary;
     }
-
     /**
      * Executes the login use case with the provided login input data.
      * This method performs the login operation using the provided {@code LoginInputData} object,
@@ -45,12 +44,12 @@ public class LoginInteractor implements LoginInputBoundary{
                 }
                 ArrayList<String> nameEvents = new ArrayList<>();
                 assert userEvents != null;
-                for(Event event: userEvents) {
+                for (Event event : userEvents) {
                     nameEvents.add(event.getName());
                 }
                 LoginOutputData loginOutputData = new LoginOutputData(user.getEmail(), false, nameEvents);
-                    loginPresenter.prepareSuccessView(loginOutputData);
-                }
+                loginPresenter.prepareSuccessView(loginOutputData);
             }
+        }
     }
 }

@@ -3,6 +3,7 @@ package entity;
 import com.hankcs.hanlp.restful.HanLPClient;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
@@ -36,10 +37,9 @@ public final class EventFinderService implements EventFinder {
      * your environment for it to work. The method will throw an error
      * otherwise. HANLP_AUTH_KEY can be null, but functionality will be
      * limited.
-     *
-     * @param  text an absolute URL giving the base location of the image
-     * @param  span the location of the image, relative to the url argument
-     * @return      the image at the specified URL
+     * @param  text the input text to be parsed, less than 5000 characters
+     * @param  span the location of the text as a list of two integers
+     * @return      the FoundEvent object wrapping a single Event
      * @see         EventFinder
      * @see         FoundEvent
      * @see         HanLPClient
@@ -70,7 +70,7 @@ public final class EventFinderService implements EventFinder {
                     "please file a bug report.");
         }
 
-        Event event = new Event();
+        Event event = new Event("", new Course(), LocalDateTime.now(), LocalDateTime.now(), new Location(), false);
 
         if (parsedText.get("ner/msra").isEmpty()) return new FoundEvent(event, span);
 
