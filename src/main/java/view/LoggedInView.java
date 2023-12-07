@@ -2,6 +2,7 @@ package view;
 
 import app.UpdateEventUseCaseFactory;
 import data_access.UpdateEventDataAccessObject;
+import interface_adapters.CreateEventViewModel;
 import interface_adapters.ViewManagerModel;
 import interface_adapters.logged_in.LoggedInState;
 import interface_adapters.logged_in.LoggedInViewModel;
@@ -99,6 +100,9 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
     }
 
     public void createActionPerformed(ActionEvent e) {
+        CreateEventViewModel createView = new CreateEventViewModel();
+
+        CreateEventView createdView = new CreateEventView(createView);
 
     }
 
