@@ -6,16 +6,14 @@ public class Location {
     private Double longitude;
     private Double latitude;
 
-    public Location(String buildingName, String address, double longitude, double latitude) {
-        this.buildingName = buildingName;
+    public Location(String name, String address, double lon, double lat) {
+        buildingName = name;
         this.address = address;
-        this.longitude = longitude;
-        this.latitude = latitude;
+        longitude = lon;
+        latitude = lat;
     }
 
-    public Location() {
-
-    }
+    public Location(){}
 
     // setters
 

@@ -1,8 +1,7 @@
 package entity;
 
-import com.google.api.services.calendar.model.EventDateTime;
-
 import java.time.*;
+import java.util.Optional;
 
 public class Event {
     private String name;
@@ -24,12 +23,6 @@ public class Event {
         this.completed = completed;
         this.location = location;
     }
-
-    public Event() {
-
-    }
-
-    public Event(){}
 
     public String getName() {
         return name;
@@ -86,11 +79,8 @@ public class Event {
     public void setCompleted(boolean compl){
         completed = compl;
     }
-
     public String getEventId(){return eventId;}
     public void setEventId(String eventId){this.eventId = eventId;}
-
-
     @Override
     public String toString() {
         return "Event{" +

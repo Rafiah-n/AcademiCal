@@ -1,17 +1,8 @@
 package app;
 
-import entity.EventFinder;
-import entity.EventFinderService;
 import interface_adapters.ViewManagerModel;
-import interface_adapters.convertDoc.ConvertDocViewModel;
-import interface_adapters.convertDoc.ConvertDocController;
-import use_case.convertDoc.ConvertDocInteractor;
-import use_case.convertDoc.ConvertDocOutputBoundary;
-import use_case.convertDoc.convertDocInputBoundary;
-import view.ConvertDocView;
 import data_access.FileUserDataAccessObject;
 import entity.CommonUserFactory;
-import interface_adapters.ViewManagerModel;
 import interface_adapters.logged_in.LoggedInViewModel;
 import interface_adapters.login.LoginViewModel;
 import view.LoggedInView;
@@ -24,8 +15,7 @@ import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) {
-
-    /*
+        /*
         JFrame application = new JFrame("Convert Doc");
         application.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
@@ -55,7 +45,7 @@ public class Main {
         application.pack();
         application.setSize(350, 150);
         application.setVisible(true);
-     */
+        */
         JFrame application = new JFrame("Login");
         application.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 

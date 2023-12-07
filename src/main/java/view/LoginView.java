@@ -58,7 +58,7 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
                 }
         );
 
-        cancel.addActionListener(this);
+        cancel.addActionListener(e -> System.exit(0));
 
         emailInputField.addKeyListener(new KeyListener() {
             @Override

@@ -1,10 +1,11 @@
-package view.updateEvent;
+package view;
 
 import entity.*;
 import entity.Event;
-import interface_adapters.updateEvent.UpdateEventController;
-import interface_adapters.updateEvent.UpdateEventState;
-import interface_adapters.updateEvent.UpdateEventViewModel;
+import interface_adapters.CreateEventState;
+import interface_adapters.CreateEventViewModel;
+import use_case.createEventDataInput;
+import use_case.createEventInteractor;
 import view.LabelTextPanel;
 
 import javax.swing.*;
@@ -19,11 +20,10 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-public class UpdateEventView extends JPanel implements ActionListener, PropertyChangeListener {
+public class CreateEventView extends JPanel implements ActionListener, PropertyChangeListener {
 
-    public final String viewName = "Update Event";
-    private UpdateEventViewModel updateEventViewModel;
-    private UpdateEventController updateEventController;
+    public final String viewName = "Create Event";
+    private CreateEventViewModel createEventViewModel;
     final JTextField eventNameInputField = new JTextField(20);
     private final JLabel eventNameErrorField = new JLabel();
 
@@ -41,8 +41,6 @@ public class UpdateEventView extends JPanel implements ActionListener, PropertyC
 
     final JCheckBox completedCheckBox = new JCheckBox("Completed");
 
-    // assignment event specific
-
     final JTextField lateDueDateInputField = new JTextField(20);
     private final JLabel lateDueDateErrorField = new JLabel();
 
@@ -53,21 +51,14 @@ public class UpdateEventView extends JPanel implements ActionListener, PropertyC
     private final JLabel typeErrorField = new JLabel(); //dropbox lec-tut
 
     final JCheckBox requiredCheckBox = new JCheckBox("Required");
-
-    // reading event specific (will use required checkbox)
     final JTextField resourceInputField = new JTextField(20);
     private final JLabel resourceErrorField = new JLabel();
 
-    // class event
-
-    // final JComboBox<> type = startTimeErrorField;
-
-    // study event
     final JTextField todoInputField = new JTextField(20);
     private final JLabel todoErrorField = new JLabel();
 
 
-    JButton updateButton;
+    JButton createButton;
     JButton cancelButton;
 
     // private final JComboBox<String> eventTypeComboBox;
@@ -75,19 +66,17 @@ public class UpdateEventView extends JPanel implements ActionListener, PropertyC
     /**
      * Constructs an UpdateEventView with the specified view model and controller.
      *
-     * @param updateEventViewModel The view model for handling the state of the update event view.
-     * @param updateEventController The controller for updating events based on user input.
+     * @param createEventViewModel The view model for handling the state of the update event view
      */
 
-    public UpdateEventView(UpdateEventViewModel updateEventViewModel, UpdateEventController updateEventController)
-    {   this.updateEventController = updateEventController;
-        this.updateEventViewModel = updateEventViewModel;
-        this.updateEventViewModel.addPropertyChangeListener(this);
+    public CreateEventView(CreateEventViewModel createEventViewModel) {
+        this.createEventViewModel = createEventViewModel;
+        this.createEventViewModel.addPropertyChangeListener(this);
 
-        JLabel title = new JLabel("Update Event");
+        JLabel title = new JLabel("Create Event");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-/*
+
         LabelTextPanel eventNameInfo = new LabelTextPanel(
                 new JLabel("Event Name"), eventNameInputField);
         LabelTextPanel courseInfo = new LabelTextPanel(
@@ -111,25 +100,23 @@ public class UpdateEventView extends JPanel implements ActionListener, PropertyC
 
 
         JPanel buttons = new JPanel();
-        updateButton = new JButton(updateEventViewModel.UPDATE_BUTTON_LABEL);
-        buttons.add(updateButton);
-        cancelButton = new JButton(updateEventViewModel.CANCEL_BUTTON_LABEL);
+        createButton = new JButton(createEventViewModel.CREATE_BUTTON_LABEL);
+        buttons.add(createButton);
+        cancelButton = new JButton(createEventViewModel.CANCEL_BUTTON_LABEL);
         buttons.add(cancelButton);
-        populateUpdateDialog();
-        // Set specific fields based on the event type
-        // showHideFieldsBasedOnEventType(eventType);
-        updateButton.addActionListener(
+        populateCreateDialog();
+        createButton.addActionListener(
                 new ActionListener() {
                     /**
                      * Handles the actionPerformed event for buttons in the view.
                      * Calls the appropriate method based on the event source.
                      *
                      * @param e The ActionEvent representing the button click.
-                     * /
+                     */
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        if (e.getSource().equals(updateButton)) {
-                            handleUpdate();
+                        if (e.getSource().equals(createButton)) {
+                            handleCreate();
                         } // else if (evt.getSource().equals(cancelButton)) {
                         // handleCancel();
                     }
@@ -137,12 +124,12 @@ public class UpdateEventView extends JPanel implements ActionListener, PropertyC
         );
         cancelButton.addActionListener(this);
 
-        /* eventNameInputField.addKeyListener(new KeyListener() {
+         eventNameInputField.addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {
-                UpdateEventState currentState = updateEventViewModel.getState();
+                CreateEventState currentState = createEventViewModel.getState();
                 currentState.setEventName(eventNameInputField.getText());
-                updateEventViewModel.setState(currentState);
+                createEventViewModel.setState(currentState);
             }
 
             @Override
@@ -154,7 +141,6 @@ public class UpdateEventView extends JPanel implements ActionListener, PropertyC
             }
         });
 
-          * /
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
@@ -184,7 +170,6 @@ public class UpdateEventView extends JPanel implements ActionListener, PropertyC
         this.add(percantageErrorField);
 
         this.add(buttons);
-        */
     }
 
     /**
@@ -194,11 +179,11 @@ public class UpdateEventView extends JPanel implements ActionListener, PropertyC
      * @param evt The ActionEvent representing the button click.
      */
     public void actionPerformed(ActionEvent evt) {
-        if (evt.getSource().equals(updateButton)) {
-            handleUpdate();
+        if (evt.getSource().equals(createButton)) {
+            handleCreate();
         } // else if (evt.getSource().equals(cancelButton)) {
-            // handleCancel();
-        }
+        // handleCancel();
+    }
     //}
 
     /**
@@ -211,82 +196,49 @@ public class UpdateEventView extends JPanel implements ActionListener, PropertyC
     private String getEventType(String eventName) {
         return eventName.substring(0,eventName.indexOf(":")).toLowerCase();
     }
-    private void handleUpdate() {
-//        UpdateEventState currentState = updateEventViewModel.getState();
-//        String selectedEventType = getEventType(currentState.getEvent().getName());
-//        // Create an event based on the selected type
-//        Event updatedEvent = createEventFromFields(selectedEventType);
-//        currentState.setEvent(updatedEvent);
-//        // Update logic using updateEventController
-//        updateEventController.execute(updatedEvent);
-//        //
-//        // Optionally close the window or perform additional actions
-//        System.out.println(updatedEvent.getName());
-//
-        UpdateEventState currentState = updateEventViewModel.getState();
+    private void handleCreate() {
+        CreateEventState currentState = createEventViewModel.getState();
         Event currentEvent = currentState.getEvent();
         String selectedEventType = getEventType(currentEvent.getName());
 
-        // Create an event based on the selected type
-        Event updatedEvent = createEventFromFields(selectedEventType);
+        createEventDataInput createdEvent = createEventFromFields(selectedEventType);
 
-        currentState.setEvent(updatedEvent);
-        // Update logic using updateEventController
-        updateEventController.execute(updatedEvent);
+        currentState.setEvent(createdEvent.getEvent());
 
-        // Optionally close the window or perform additional actions
-        System.out.println(updatedEvent.getName());
-
+        createEventInteractor inter = new createEventInteractor(createdEvent);
+        inter.execute();
     }
 
-    private Event createEventFromFields(String eventType) {
+    private createEventDataInput createEventFromFields(String eventType) {
+        CreateEventState state = createEventViewModel.getState();
+        createEventDataInput data;
         switch (eventType) {
             case "study":
-                return createStudyEvent();
-            case "course":
-                return createClassEvent();
+                data = new createEventDataInput(state.getEventName(), state.getCourse(),
+                        state.getStartTime(), state.getEndTime(), state.getLocation(), state.getEventCompleted(),
+                        state.getStudyTodo());
+                return data;
+            case "class":
+                data = new createEventDataInput(state.getEventName(), state.getCourse(),
+                        state.getStartTime(), state.getEndTime(), state.getLocation(), state.getEventCompleted(),
+                        state.getClassType());
+                return data;
             case "assignment":
-                return createAssignmentEvent();
+                data = new createEventDataInput(state.getEventName(), state.getCourse(),
+                        state.getStartTime(), state.getEndTime(), state.getLocation(), state.getEventCompleted(),
+                        state.getAssignmentType(), state.getAssignmentPercentage(), state.getAssignmentRequired(),
+                        state.getLateDueDate());
+                return data;
             case "reading":
-                return createReadingEvent();
+                data = new createEventDataInput(state.getEventName(), state.getCourse(),
+                        state.getStartTime(), state.getEndTime(), state.getLocation(), state.getEventCompleted(),
+                        state.getResource(), state.getAssignmentRequired());
+                return data;
             default:
                 throw new IllegalArgumentException("Unknown event type: " + eventType);
         }
     }
 
-    private StudyEvent createStudyEvent() {
-        //StudyEvent studyEvent = new StudyEvent();
-        //setCommonEventFields(studyEvent);
-        //studyEvent.addTodo(todoErrorField.getText());
-        //return studyEvent;
-    }
-
-    private ClassEvent createClassEvent() {
-        ClassEvent classEvent = new ClassEvent();
-        setCommonEventFields(classEvent);
-        classEvent.setType(typeInputField.getText());
-        return classEvent;
-    }
-
-    private AssignmentEvent createAssignmentEvent() {
-        AssignmentEvent assignmentEvent = new AssignmentEvent();
-        setCommonEventFields(assignmentEvent);
-        assignmentEvent.setRequired(requiredCheckBox.isSelected());
-        // LocalDateTime newLateDate = LocalDateTime.parse(lateDueDateInputField.getText());
-        // assignmentEvent.setLateDueDate(newLateDate);
-        assignmentEvent.setPercentage(Integer.parseInt(percentageInputField.getText()));
-        return assignmentEvent;
-    }
-
-    private ReadingEvent createReadingEvent() {
-        ReadingEvent readingEvent = new ReadingEvent();
-        setCommonEventFields(readingEvent);
-        readingEvent.setPages(new ArrayList<>());
-        readingEvent.setRequired(requiredCheckBox.isSelected());
-        Resource resource = new Resource(resourceInputField.getText());
-        readingEvent.setResource(resource);
-        return readingEvent;
-    }
 
     private void setCommonEventFields(Event event) {
         event.setName(eventNameInputField.getText());
@@ -308,21 +260,17 @@ public class UpdateEventView extends JPanel implements ActionListener, PropertyC
      */
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        UpdateEventState state = (UpdateEventState) evt.getNewValue();
-         //Update the view based on the state, e.g., display error messages
+        CreateEventState state = (CreateEventState) evt.getNewValue();
     }
 
-    private void populateUpdateDialog(){
-        // DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
-        // Set specific fields based on the event type
-        Event event = updateEventViewModel.getState().getEvent();
+    private void populateCreateDialog(){
+        Event event = createEventViewModel.getState().getEvent();
         eventNameInputField.setText(event.getName());
         courseInputField.setText(event.getCourse().getCourseContact());
         startTimeInputField.setText(event.getStartTime().toString());
         endTimeInputField.setText(event.getEndTime().toString());
         locationInputField.setText(event.getLocation().getAddress());
         showHideFieldsBasedOnEventType(getEventType(event.getName()));
-
     }
     private void showHideFieldsBasedOnEventType(String eventType) {
         boolean isAssignment = "assignment".equals(eventType);
@@ -348,7 +296,7 @@ public class UpdateEventView extends JPanel implements ActionListener, PropertyC
         todoInputField.setVisible(isStudy);
 
         // Show/hide buttons based on the event type
-        updateButton.setVisible(isAssignment || isClass || isReading || isStudy);
+        createButton.setVisible(isAssignment || isClass || isReading || isStudy);
         cancelButton.setVisible(isAssignment || isClass || isReading || isStudy);
     }
 
@@ -364,4 +312,3 @@ public class UpdateEventView extends JPanel implements ActionListener, PropertyC
         JOptionPane.showMessageDialog(this, popuppanel, "Important!", JOptionPane.PLAIN_MESSAGE);
     }
 }
-

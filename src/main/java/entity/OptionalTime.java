@@ -72,7 +72,7 @@ public class OptionalTime {
 
         // hour + minute
         if (twelveHourMatcher.find()) {
-            // System.out.println(twelveHourMatcher.namedGroups());
+            System.out.println(twelveHourMatcher.group());
             hour = Optional.of(Integer.parseInt(twelveHourMatcher.group(1)));
             if (twelveHourMatcher.group(2) != null) {
                 System.out.println(twelveHourMatcher.group(2));
@@ -175,5 +175,4 @@ public class OptionalTime {
 
         return ret;
     }
-
 }

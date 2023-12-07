@@ -12,10 +12,6 @@ public class ClassEvent extends Event{
         this.type = type;
     }
 
-    public ClassEvent() {
-
-    }
-
     public String getType(){
         return type;
     }

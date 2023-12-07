@@ -1,7 +1,5 @@
 package entity;
 
-import com.google.api.client.util.DateTime;
-
 import java.time.*;
 import java.util.ArrayList;
 
@@ -21,10 +19,6 @@ public class AssignmentEvent extends Event{
         this.percentage = percentage;
         this.required = required;
         this.lateDueDate = lateDueDate;
-    }
-
-    public AssignmentEvent() {
-
     }
 
 

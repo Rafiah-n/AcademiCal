@@ -6,9 +6,6 @@ public class Resource {
     private String link;
     private File bibTex;
 
-    public Resource(String text) {
-    }
-
     // setters
     public void setLink(String link){
         this.link = link;

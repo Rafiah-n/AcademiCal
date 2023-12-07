@@ -37,7 +37,6 @@ public final class EventFinderService implements EventFinder {
      * your environment for it to work. The method will throw an error
      * otherwise. HANLP_AUTH_KEY can be null, but functionality will be
      * limited.
-     *
      * @param  text the input text to be parsed, less than 5000 characters
      * @param  span the location of the text as a list of two integers
      * @return      the FoundEvent object wrapping a single Event

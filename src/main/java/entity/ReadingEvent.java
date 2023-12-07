@@ -17,10 +17,6 @@ public class ReadingEvent extends Event{
         this.required = required;
     }
 
-    public ReadingEvent() {
-
-    }
-
     public Resource getResource() {
         return resource;
     }
