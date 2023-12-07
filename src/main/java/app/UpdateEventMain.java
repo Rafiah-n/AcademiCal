@@ -33,7 +33,7 @@ public class UpdateEventMain {
         Course course = new Course();
         course.setCourseContact("Kubra");
 
-        Location location = new Location("buildingName","Address",12.12,12.0);
+        Location location = new Location();
         AssignmentEvent event = new AssignmentEvent("Assignment: CSC207", course, LocalDateTime.now(),
                 LocalDateTime.now(),location, false, "Reading", 15, true,
                 LocalDateTime.now());

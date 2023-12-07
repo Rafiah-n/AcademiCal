@@ -87,7 +87,7 @@ public class UpdateEventView extends JPanel implements ActionListener, PropertyC
         JLabel title = new JLabel("Update Event");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-
+/*
         LabelTextPanel eventNameInfo = new LabelTextPanel(
                 new JLabel("Event Name"), eventNameInputField);
         LabelTextPanel courseInfo = new LabelTextPanel(
@@ -125,7 +125,7 @@ public class UpdateEventView extends JPanel implements ActionListener, PropertyC
                      * Calls the appropriate method based on the event source.
                      *
                      * @param e The ActionEvent representing the button click.
-                     */
+                     * /
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(updateButton)) {
@@ -154,7 +154,7 @@ public class UpdateEventView extends JPanel implements ActionListener, PropertyC
             }
         });
 
-         */
+          * /
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
@@ -184,6 +184,7 @@ public class UpdateEventView extends JPanel implements ActionListener, PropertyC
         this.add(percantageErrorField);
 
         this.add(buttons);
+        */
     }
 
     /**
@@ -254,10 +255,10 @@ public class UpdateEventView extends JPanel implements ActionListener, PropertyC
     }
 
     private StudyEvent createStudyEvent() {
-        StudyEvent studyEvent = new StudyEvent();
-        setCommonEventFields(studyEvent);
-        studyEvent.addTodo(todoErrorField.getText());
-        return studyEvent;
+        //StudyEvent studyEvent = new StudyEvent();
+        //setCommonEventFields(studyEvent);
+        //studyEvent.addTodo(todoErrorField.getText());
+        //return studyEvent;
     }
 
     private ClassEvent createClassEvent() {
